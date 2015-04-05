@@ -11,5 +11,8 @@
     "bower_components",
     "test",
     "tests"
-  ]
+  ],
+  "devDependencies": {
+    "true": "~1.0.1"
+  }
 }
