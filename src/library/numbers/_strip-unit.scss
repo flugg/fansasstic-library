@@ -1,0 +1,11 @@
+
+/// Strips away any unit after the number.
+/// @access public
+///
+/// @param {number} $value - Number to be stripped.
+/// @return {boolean}
+
+@function strip-unit( $number )
+{
+    @return $number / ( $number * 0 + 1 );
+}

@@ -1,0 +1,20 @@
+
+/// Rotates a list right or left (reversed).
+/// @access public
+///
+/// @param {list} $list - List to be reversed.
+/// @param {boolean} $reverse - Wether or not to rotate left.
+/// @return {list}
+
+@function rotate( $list, $reverse: false )
+{
+    $result: ();
+    $direction: if( $reverse, -1, 1 );
+
+    @for $index from 0 to length( $list )
+    {
+        $result: append( $result, nth( $list, ( $index - $direction ) % length( $list ) + 1 ) );
+    }
+
+    @return $result;
+}

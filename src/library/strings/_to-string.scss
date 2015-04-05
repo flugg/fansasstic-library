@@ -1,0 +1,47 @@
+
+/// Casts the value to a string.
+/// @access public
+/// @requires {function} is-list
+/// @requires {function} is-map
+///
+/// @param {*} $value - Value to be converted.
+/// @return {bool}
+
+@function to-string( $value )
+{
+    $string: '';
+
+    @if is-list( $value )
+    {
+        $string: $string + '( ';
+
+        @for $index from 1 through length( $value )
+        {
+            $string: $string + to-string( nth( $value, $index ) );
+
+            @if $index != length( $value )
+            {
+                $string: $string + ' ';
+            }
+        }
+
+        $string: $string + ' )';
+    }
+    @else if is-map( $value )
+    {
+        $string: $string + '( ';
+
+        @each $key, $value in $value
+        {
+            $string: $string + $key + ': ' + to-string( $value ) + ', ';
+        }
+
+        $string: str-slice( $string, 1, length( $string ) - 4 ) + ' )';
+    }
+    @else
+    {
+        $string: $value + unquote( '' );
+    }
+
+    @return quote( $string );
+}

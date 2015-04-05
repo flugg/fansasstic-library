@@ -1,0 +1,18 @@
+
+/// Push a value to the front of a list.
+/// @access public
+/// @require {function} empty
+///
+/// @param {list} $list - List to be added to.
+/// @param {*} $value - Value to be added.
+/// @return {list}
+
+@function prepend( $list, $value )
+{
+    @if empty( $list )
+    {
+        @return $value;
+    }
+
+    @return join( $value, $list );
+}

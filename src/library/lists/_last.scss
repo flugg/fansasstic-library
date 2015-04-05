@@ -1,0 +1,17 @@
+
+/// Retrieves the last item of the list.
+/// @access public
+/// @require {function} empty
+///
+/// @param {number} $list - List to be retrieved from.
+/// @return {*}
+
+@function last( $list )
+{
+    @if empty( $list )
+    {
+        @return null;
+    }
+
+    @return nth( $list, length( $list ) );
+}

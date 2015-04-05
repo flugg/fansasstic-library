@@ -1,0 +1,19 @@
+
+/// Checks if the value exists in list.
+/// @access public
+///
+/// @param {list} $list - List to be checked.
+/// @param {*} $value - Value to check for.
+/// @return {boolean}
+
+@function contains( $list, $value )
+{
+    @return not not index( $list, $value );
+}
+
+/// @alias contain
+
+@function in-list( $list, $value )
+{
+    @return contains( $list, $value );
+}

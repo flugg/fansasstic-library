@@ -1,0 +1,11 @@
+
+/// Checks if a list has no items.
+/// @access public
+///
+/// @param {number} $list - List to be checked.
+/// @return {bool}
+
+@function empty( $list )
+{
+    @return length( $list ) == 0;
+}

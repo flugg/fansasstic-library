@@ -1,0 +1,13 @@
+
+/// Multiplies all values of a map or list, or even just a number.
+/// @access public
+/// @requires {function} _calculate
+///
+/// @param {map|list|number} $value - Value to be multiplied.
+/// @param {map|list|number} $multiplier - Value to multiply by.
+/// @return {number}
+
+@function multiply( $multiplicand, $multiplier )
+{
+    @return _calculate( $multiplicand, $multiplier, 'multiply' );
+}

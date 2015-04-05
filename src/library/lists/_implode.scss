@@ -1,0 +1,39 @@
+
+/// Convert list to string with given separator.
+/// @access public
+/// @requires is-list
+///
+/// @param {list} $list - List to be converted.
+/// @param {string} $separator - String to separate list items.
+/// @return {list}
+
+@function implode( $list, $separator: ' ' )
+{
+    @if empty( $list )
+    {
+        @return '';
+    }
+
+    $result: null;
+
+    @for $index from 1 through length( $list )
+    {
+        $item: nth( $list, $index );
+
+        @if is-list( $item )
+        {
+            $result: $result#{implode( $item, $separator )};
+        }
+        @else
+        {
+            $result: $result#{$item};
+        }
+
+        @if $index != length( $list )
+        {
+            $result: $result#{$separator}
+        }
+    }
+
+    @return quote( $result );
+}

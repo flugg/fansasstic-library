@@ -1,0 +1,30 @@
+
+/// Checks if the value is of type number.
+/// @access private
+///
+/// @param {*} $values - Value being checked.
+/// @return {bool}
+
+@function _is-number( $value )
+{
+    @return type-of( $value ) == 'number';
+}
+
+/// Checks if the given value or values are of type number.
+/// @access public
+///
+/// @param {*} $values - Value being checked.
+/// @return {bool}
+
+@function is-number( $values... )
+{
+    @each $value in $values
+    {
+        @if not _is-number( $value )
+        {
+            @return false;
+        }
+    }
+
+    @return true;
+}

@@ -1,0 +1,13 @@
+
+/// Adds all values of a map or list, or even just a number.
+/// @access public
+/// @requires {function} _calculate
+///
+/// @param {map|list|number} $addend - Value to be added to.
+/// @param {map|list|number} $addend2 - Value to add by.
+/// @return {number}
+
+@function add( $addend, $addend2 )
+{
+    @return _calculate( $addend, $addend2, 'add' );
+}

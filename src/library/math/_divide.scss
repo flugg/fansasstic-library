@@ -1,0 +1,13 @@
+
+/// Divides all values of a map or list, or even just a number.
+/// @access public
+/// @requires {function} _calculate
+///
+/// @param {map|list|number} $dividend - Value to be divided.
+/// @param {map|list|number} $divisor - Value to divide by.
+/// @return {number}
+
+@function divide( $dividend, $divisor )
+{
+    @return _calculate( $dividend, $divisor, 'divide' );
+}

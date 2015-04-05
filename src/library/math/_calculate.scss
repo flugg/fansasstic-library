@@ -1,0 +1,316 @@
+
+/// Basic arithmetic algorithms with two numbers.
+/// @access private
+///
+/// @param {map|list|number} $value1 - Value to be calculated.
+/// @param {map|list|number} $value2 - Value to calculate by.
+/// @return {number}
+
+@function _calculate-number-with-number( $number1, $number2, $operation: 'add' )
+{
+    $result: null;
+
+    @if $operation == 'add'
+    {
+        $result: ( $number1 + $number2 );
+    }
+    @else if $operation == 'substract'
+    {
+        $result: ( $number1 - $number2 );
+    }
+    @else if $operation == 'multiply'
+    {
+        $result: ( $number1 * $number2 );
+    }
+    @else if $operation == 'divide'
+    {
+        $result: if( $number2 == 0, null, ( $number1 / $number2 ) );
+    }
+
+    @return $result;
+}
+
+/// Basic arithmetic algorithms with lists and numbers.
+/// @access private
+///
+/// @param {map|list|number} $value1 - Value to be calculated.
+/// @param {map|list|number} $value2 - Value to calculate by.
+/// @return {number}
+
+@function _calculate-list-with-number( $list, $number, $operation: 'add' )
+{
+    $result: ();
+
+    @each $value in $list
+    {
+        @if $operation == 'add'
+        {
+            $result: append( $result, $value + $number );
+        }
+        @else if $operation == 'substract'
+        {
+            $result: append( $result, $value - $number );
+        }
+        @else if $operation == 'multiply'
+        {
+            $result: append( $result, $value * $number );
+        }
+        @else if $operation == 'divide'
+        {
+            $result: if( $number == 0, append( $result, null ), append( $result, $value / $number ) );
+        }
+    }
+
+    @return $result;
+}
+
+/// Basic arithmetic algorithms with lists and numbers reversed.
+/// @access private
+///
+/// @param {map|list|number} $value1 - Value to be calculated.
+/// @param {map|list|number} $value2 - Value to calculate by.
+/// @return {number}
+
+@function _calculate-number-with-list( $number, $list, $operation: 'add' )
+{
+    $result: ();
+
+    @each $value in $list
+    {
+        @if $operation == 'add'
+        {
+            $result: append( $result, $number + $value );
+        }
+        @else if $operation == 'substract'
+        {
+            $result: append( $result, $number - $value );
+        }
+        @else if $operation == 'multiply'
+        {
+            $result: append( $result, $number * $value );
+        }
+        @else if $operation == 'divide'
+        {
+            $result: if( $value == 0, append( $result, null ), append( $result, $number / $value ) );
+        }
+    }
+
+    @return $result;
+}
+
+/// Basic arithmetic algorithms with two lists.
+/// @access private
+///
+/// @param {map|list|number} $value1 - Value to be calculated.
+/// @param {map|list|number} $value2 - Value to calculate by.
+/// @return {number}
+
+@function _calculate-list-with-list( $list1, $list2, $operation: 'add' )
+{
+    $result: ();
+
+    @for $index from 1 through length( $list1 )
+    {
+        @if length( $list2 ) >= $index
+        {
+            @if $operation == 'add'
+            {
+                $result: append( $result, ( nth( $list1, $index ) + nth( $list2, $index ) ) );
+            }
+            @else if $operation == 'substract'
+            {
+                $result: append( $result, ( nth( $list1, $index ) - nth( $list2, $index ) ) );
+            }
+            @else if $operation == 'multiply'
+            {
+                $result: append( $result, ( nth( $list1, $index ) * nth( $list2, $index ) ) );
+            }
+            @else if $operation == 'divide'
+            {
+                $result: if( nth( $list2, $index ) == 0, append( $result, null ), append( $result, ( nth( $list1, $index ) / nth( $list2, $index ) ) ) );
+            }
+        }
+    }
+
+    @return $result;
+}
+
+/// Basic arithmetic algorithms with maps and numbers.
+/// @access private
+///
+/// @param {map|list|number} $value1 - Value to be calculated.
+/// @param {map|list|number} $value2 - Value to calculate by.
+/// @return {number}
+
+@function _calculate-map-with-number( $map, $number, $operation: 'add' )
+{
+    $result: ();
+
+    @each $key, $value in $map
+    {
+        @if $operation == 'add'
+        {
+            $result: map-merge( $result, ( #{$key}: $value + $number ) );
+        }
+        @else if $operation == 'substract'
+        {
+            $result: map-merge( $result, ( #{$key}: $value - $number ) );
+        }
+        @else if $operation == 'multiply'
+        {
+            $result: map-merge( $result, ( #{$key}: $value * $number ) );
+        }
+        @else if $operation == 'divide'
+        {
+            $result: if( $number == 0, map-merge( $result, ( #{$key}: null ) ), map-merge( $result, ( #{$key}: $value / $number ) ) );
+        }
+    }
+
+    @return $result;
+}
+
+/// Basic arithmetic algorithms with numbers and maps.
+/// @access private
+///
+/// @param {map|list|number} $value1 - Value to be calculated.
+/// @param {map|list|number} $value2 - Value to calculate by.
+/// @return {number}
+
+@function _calculate-number-with-map( $number, $map, $operation: 'add' )
+{
+    $result: ();
+
+    @each $key, $value in $map
+    {
+        @if $operation == 'add'
+        {
+            $result: map-merge( $result, ( #{$key}: $number + $value ) );
+        }
+        @else if $operation == 'substract'
+        {
+            $result: map-merge( $result, ( #{$key}: $number - $value ) );
+        }
+        @else if $operation == 'multiply'
+        {
+            $result: map-merge( $result, ( #{$key}: $number * $value ) );
+        }
+        @else if $operation == 'divide'
+        {
+            $result: if( $value == 0, map-merge( $result, ( #{$key}: null ) ), map-merge( $result, ( #{$key}: $number / $value ) ) );
+        }
+    }
+
+    @return $result;
+}
+
+/// Basic arithmetic algorithms with two maps.
+/// @access private
+/// @requires {function} unique
+///
+/// @param {map|list|number} $value1 - Value to be calculated.
+/// @param {map|list|number} $value2 - Value to calculate by.
+/// @return {number}
+
+@function _calculate-map-with-map( $map1, $map2, $operation: 'add' )
+{
+    $result: ();
+
+    $keys: unique( join( map-keys( $map1 ), map-keys( $map2 ) ) );
+
+    $value: 0;
+    $multiplier: 1;
+
+    @each $key in $keys
+    {
+        $number1: map-get( $map1, $key );
+        $number2: map-get( $map2, $key );
+
+        @if $number1 or $number2
+        {
+            $calculated-result: null;
+
+            @if $operation == 'add'
+            {
+                $calculated-result: if( $number1 and $number2, $number1 + $number2, if( $number1, $number1, $number2 ) );
+            }
+            @else if $operation == 'substract'
+            {
+                $calculated-result: if( $number1 and $number2, $number1 - $number2, if( $number1, $number1, $number2 ) );
+            }
+            @else if $operation == 'multiply'
+            {
+                $calculated-result: if( $number1 and $number2, $number1 * $number2, if( $number1, $number1, $number2 ) );
+            }
+            @else if $operation == 'divide'
+            {
+                $calculated-result: if( $number2 == 0, null, if( $number1 and $number2, $number1 / $number2, if( $number1, $number1, $number2 ) ) );
+            }
+
+            $result: map-merge( $result, ( #{$key}: $calculated-result ) );
+        }
+    }
+
+    @return $result;
+}
+
+/// Do basic arithmetic with numbers, lists and maps.
+/// @access private
+/// @requires {function} is-number
+/// @requires {function} is-list
+/// @requires {function} is-map
+/// @requires {function} _calculate-number-with-number
+/// @requires {function} _calculate-number-with-list
+/// @requires {function} _calculate-number-with-map
+/// @requires {function} _calculate-list-with-number
+/// @requires {function} _calculate-list-with-list
+/// @requires {function} _calculate-map-with-number
+/// @requires {function} _calculate-map-with-map
+///
+/// @param {map|list|number} $value1 - Value to be calculated.
+/// @param {map|list|number} $value2 - Value to calculate by.
+/// @return {number}
+
+@function _calculate( $value1, $value2, $operation: 'add' )
+{
+    $result: null;
+
+    @if is-number( $value1 )
+    {
+        @if is-number( $value2 )
+        {
+            $result: _calculate-number-with-number( $value1, $value2, $operation );
+        }
+        @else if is-list( $value2 )
+        {
+            $result: _calculate-number-with-list( $value1, $value2, $operation );
+        }
+        @else if is-map( $value2 )
+        {
+            $result: _calculate-number-with-map( $value1, $value2, $operation );
+        }
+    }
+    @else if is-list( $value1 )
+    {
+        @if is-number( $value2 )
+        {
+            $result: _calculate-list-with-number( $value1, $value2, $operation );
+        }
+        @else if is-list( $value2 )
+        {
+            $result: _calculate-list-with-list( $value1, $value2, $operation );
+        }
+    }
+    @else if is-map( $value1 )
+    {
+        @if is-number( $value2 )
+        {
+            $result: _calculate-map-with-number( $value1, $value2, $operation );
+        }
+        @else if is-map( $value2 )
+        {
+            $result: _calculate-map-with-map( $value1, $value2, $operation );
+        }
+    }
+
+    @return $result;
+}

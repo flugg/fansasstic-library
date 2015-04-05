@@ -1,0 +1,40 @@
+@include test-module( 'Numbers' )
+{
+    @include test( 'clamp' )
+    {
+        @include assert( 'Test clamp up', (
+            action: clamp( 0, 1, 2 ), equal: 1
+        ) );
+
+        @include assert( 'Test clamp down', (
+            action: clamp( 2, 0, 1 ), equal: 1
+        ) );
+
+        @include assert( 'Test reverse order', (
+            action: clamp( 0, 2, 1 ), equal: 1
+        ) );
+
+        @include assert( 'Test floats', (
+            action: clamp( 0.1, 1.1, 2.1 ), equal: 1.1
+        ) );
+
+        @include assert( 'Test units', (
+            action: clamp( 0px, 1px, 2px ), equal: 1px
+        ) );
+    }
+
+    @include test( 'strip-unit' )
+    {
+        @include assert( 'Test units', (
+            action: strip-unit( 1px ), equal: 1
+        ) );
+
+        @include assert( 'Test percent', (
+            action: strip-unit( 1% ), equal: 1
+        ) );
+
+        @include assert( 'Test float', (
+            action: strip-unit( 1.1em ), equal: 1.1
+        ) );
+    }
+}

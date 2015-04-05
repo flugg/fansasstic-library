@@ -1,0 +1,194 @@
+@include test-module( 'Math' )
+{
+    @include test( 'add' )
+    {
+        @include assert( 'Test twp positive numbers', (
+            action: add( 1, 2 ), equal: 3
+        ) );
+
+        @include assert( 'Test one negative number', (
+            action: add( 1, -2 ), equal: -1
+        ) );
+
+        @include assert( 'Test two negative numbers', (
+            action: add( -1, -2 ), equal: -3
+        ) );
+
+        @include assert( 'Test list and number', (
+            action: add( ( 0 1 2 ), 1 ), equal: ( 1 2 3 )
+        ) );
+
+        @include assert( 'Test number and list', (
+            action: add( 1, ( 0 1 2 ) ), equal: ( 1 2 3 )
+        ) );
+
+        @include assert( 'Test lists', (
+            action: add( ( 0 1 2 ), ( 0 1 2 ) ), equal: ( 0 2 4 )
+        ) );
+
+        @include assert( 'Test map and number', (
+            action: add( ( 'a': 0, 'b': 1, 'c': 2 ), 1 ), equal: ( 'a': 1, 'b': 2, 'c': 3 )
+        ) );
+
+        @include assert( 'Test number and map', (
+            action: add( 1, ( 'a': 0, 'b': 1, 'c': 2 ) ), equal: ( 'a': 1, 'b': 2, 'c': 3 )
+        ) );
+
+        @include assert( 'Test maps', (
+            action: add( ( 'a': 0, 'b': 1, 'c': 2 ), ( 'a': 0, 'b': 1, 'c': 2 ) ), equal: ( 'a': 0, 'b': 2, 'c': 4 )
+        ) );
+
+        @include assert( 'Test maps with unequal lengths', (
+            action: add( ( 'a': 0, 'b': 1, 'c': 2 ), ( 'a': 0, 'b': 1, 'c': 2, 'd': 3 ) ), equal: ( 'a': 0, 'b': 2, 'c': 4, 'd': 3 )
+        ) );
+
+        @include assert( 'Test maps with unequal lengths reversed', (
+            action: add( ( 'a': 0, 'b': 1, 'c': 2, 'd': 3 ), ( 'a': 0, 'b': 1, 'c': 2 ) ), equal: ( 'a': 0, 'b': 2, 'c': 4, 'd': 3 )
+        ) );
+    }
+
+    @include test( 'substract' )
+    {
+        @include assert( 'Test two positive numbers', (
+            action: substract( 1, 2 ), equal: -1
+        ) );
+
+        @include assert( 'Test one negative number', (
+                action: substract( 1, -2 ), equal: 3
+        ) );
+
+        @include assert( 'Test two negative numbers', (
+                action: substract( -1, -2 ), equal: 1
+        ) );
+
+        @include assert( 'Test list and number', (
+            action: substract( ( 0 1 2 ), 1 ), equal: ( -1 0 1 )
+        ) );
+
+        @include assert( 'Test number and list', (
+            action: substract( 1, ( 0 1 2 ) ), equal: ( 1 0 -1 )
+        ) );
+
+        @include assert( 'Test lists', (
+            action: substract( ( 0 1 2 ), ( 0 1 2 ) ), equal: ( 0 0 0 )
+        ) );
+
+        @include assert( 'Test map and number', (
+            action: substract( ( 'a': 0, 'b': 1, 'c': 2 ), 1 ), equal: ( 'a': -1, 'b': 0, 'c': 1 )
+        ) );
+
+        @include assert( 'Test number and map', (
+            action: substract( 1, ( 'a': 0, 'b': 1, 'c': 2 ) ), equal: ( 'a': 1, 'b': 0, 'c': -1 )
+        ) );
+
+        @include assert( 'Test maps', (
+            action: substract( ( 'a': 2, 'b': 1, 'c': 0 ), ( 'a': 0, 'b': 1, 'c': 2 ) ), equal: ( 'a': 2, 'b': 0, 'c': -2 )
+        ) );
+
+        @include assert( 'Test maps with unequal lengths', (
+            action: substract( ( 'a': 0, 'b': 1, 'c': 2 ), ( 'a': 0, 'b': 1, 'c': 2, 'd': 3 ) ), equal: ( 'a': 0, 'b': 0, 'c': 0, 'd': 3 )
+        ) );
+
+        @include assert( 'Test maps with unequal lengths reversed', (
+            action: substract( ( 'a': 0, 'b': 1, 'c': 2, 'd': 3 ), ( 'a': 0, 'b': 1, 'c': 2 ) ), equal: ( 'a': 0, 'b': 0, 'c': 0, 'd': 3 )
+        ) );
+    }
+
+    @include test( 'multiply' )
+    {
+        @include assert( 'Test two positive numbers', (
+            action: multiply( 1, 2 ), equal: 2
+        ) );
+
+        @include assert( 'Test one negative number', (
+            action: multiply( 1, -2 ), equal: -2
+        ) );
+
+        @include assert( 'Test two negative numbers', (
+            action: multiply( -1, -2 ), equal: 2
+        ) );
+
+        @include assert( 'Test list and number', (
+            action: multiply( ( 0 1 2 ), 2 ), equal: ( 0 2 4 )
+        ) );
+
+        @include assert( 'Test number and list', (
+            action: multiply( 2, ( 0 1 2 ) ), equal: ( 0 2 4 )
+        ) );
+
+        @include assert( 'Test lists', (
+            action: multiply( ( 0 1 2 ), ( 0 1 2 ) ), equal: ( 0 1 4 )
+        ) );
+
+        @include assert( 'Test map and number', (
+            action: multiply( ( 'a': 0, 'b': 1, 'c': 2 ), 2 ), equal: ( 'a': 0, 'b': 2, 'c': 4 )
+        ) );
+
+        @include assert( 'Test number and map', (
+            action: multiply( 2, ( 'a': 0, 'b': 1, 'c': 2 ) ), equal: ( 'a': 0, 'b': 2, 'c': 4 )
+        ) );
+
+        @include assert( 'Test maps', (
+            action: multiply( ( 'a': 0, 'b': 1, 'c': 2 ), ( 'a': 0, 'b': 1, 'c': 2 ) ), equal: ( 'a': 0, 'b': 1, 'c': 4 )
+        ) );
+
+        @include assert( 'Test maps with unequal lengths', (
+            action: multiply( ( 'a': 0, 'b': 1, 'c': 2 ), ( 'a': 0, 'b': 1, 'c': 2, 'd': 3 ) ), equal: ( 'a': 0, 'b': 1, 'c': 4, 'd': 3 )
+        ) );
+
+        @include assert( 'Test maps with unequal lengths reversed', (
+            action: multiply( ( 'a': 0, 'b': 1, 'c': 2, 'd': 3 ), ( 'a': 0, 'b': 1, 'c': 2 ) ), equal: ( 'a': 0, 'b': 1, 'c': 4, 'd': 3 )
+        ) );
+    }
+
+    @include test( 'divide' )
+    {
+        @include assert( 'Test two positive numbers', (
+            action: divide( 1, 2 ), equal: 0.5
+        ) );
+
+        @include assert( 'Test one negative number', (
+            action: divide( 1, -2 ), equal: -0.5
+        ) );
+
+        @include assert( 'Test two negative numbers', (
+            action: divide( -1, -2 ), equal: 0.5
+        ) );
+
+        @include assert( 'Test divide by zero', (
+            action: divide( 1, 0 ), equal: null
+        ) );
+
+        @include assert( 'Test list and number', (
+            action: divide( ( 0 1 2 ), 2 ), equal: ( 0 0.5 1 )
+        ) );
+
+        @include assert( 'Test number and list', (
+            action: divide( 2, ( 0 1 2 ) ), equal: ( null 2 1 )
+        ) );
+
+        @include assert( 'Test lists', (
+            action: divide( ( 0 1 2 ), ( 0 1 2 ) ), equal: ( null 1 1 )
+        ) );
+
+        @include assert( 'Test map and number', (
+            action: divide( ( 'a': 0, 'b': 1, 'c': 2 ), 2 ), equal: ( 'a': 0, 'b': 0.5, 'c': 1 )
+        ) );
+
+        @include assert( 'Test number and map', (
+            action: divide( 2, ( 'a': 0, 'b': 1, 'c': 2 ) ), equal: ( 'a': null, 'b': 2, 'c': 1 )
+        ) );
+
+        @include assert( 'Test maps', (
+            action: divide( ( 'a': 0, 'b': 1, 'c': 2 ), ( 'a': 0, 'b': 1, 'c': 2 ) ), equal: ( 'a': null, 'b': 1, 'c': 1 )
+        ) );
+
+        @include assert( 'Test maps with unequal lengths', (
+            action: divide( ( 'a': 0, 'b': 1, 'c': 2 ), ( 'a': 0, 'b': 1, 'c': 2, 'd': 3 ) ), equal: ( 'a': null, 'b': 1, 'c': 1, 'd': 3 )
+        ) );
+
+        @include assert( 'Test maps with unequal lengths reversed', (
+            action: divide( ( 'a': 0, 'b': 1, 'c': 2, 'd': 3 ), ( 'a': 0, 'b': 1, 'c': 2 ) ), equal: ( 'a': null, 'b': 1, 'c': 1, 'd': 3 )
+        ) );
+    }
+}

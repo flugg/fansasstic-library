@@ -1,0 +1,30 @@
+
+/// Checks if the value is of type string.
+/// @access private
+///
+/// @param {*} $values - Value being checked.
+/// @return {bool}
+
+@function _is-string( $value )
+{
+    @return type-of( $value ) == 'string';
+}
+
+/// Checks if the given value or values are of type string.
+/// @access public
+///
+/// @param {*} $values - Value being checked.
+/// @return {bool}
+
+@function is-string( $values... )
+{
+    @each $value in $values
+    {
+        @if not _is-string( $value )
+        {
+            @return false;
+        }
+    }
+
+    @return true;
+}

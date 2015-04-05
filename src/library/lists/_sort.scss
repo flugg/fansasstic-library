@@ -1,0 +1,39 @@
+
+/// Sort the list.
+/// @access public
+/// @requires {function} is-list
+/// @requires {function} swap
+///
+/// @param {list} $list - List to be sorted.
+/// @param {bool} $recursive - Wether or not it should traverse the list recursively.
+/// @return {list}
+
+@function sort( $list, $recursive: false )
+{
+    $sorted: false;
+
+    @while not $sorted
+    {
+        $sorted: true;
+
+        @for $index from 1 through length( $list ) - 1
+        {
+            @if ( length( $list ) > 1 )
+            {
+                $item: nth( $list, $index );
+
+                @if is-list( $item ) and $recursive
+                {
+                    $list: sort( $item, true );
+                }
+                @else if ( $item > nth( $list, $index + 1 ) )
+                {
+                    $sorted: false;
+                    $list: swap( $list, $index, $index + 1 )
+                }
+            }
+        }
+    }
+
+    @return $list;
+}

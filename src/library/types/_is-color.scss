@@ -1,0 +1,30 @@
+
+/// Checks if the value is of type color.
+/// @access private
+///
+/// @param {*} $values - Value being checked.
+/// @return {bool}
+
+@function _is-color( $value )
+{
+    @return type-of( $value ) == 'color';
+}
+
+/// Checks if the given value or values are of type color.
+/// @access public
+///
+/// @param {*} $values - Value being checked.
+/// @return {bool}
+
+@function is-color( $values... )
+{
+    @each $value in $values
+    {
+        @if not _is-color( $value )
+        {
+            @return false;
+        }
+    }
+
+    @return true;
+}

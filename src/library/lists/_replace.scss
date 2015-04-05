@@ -1,0 +1,41 @@
+
+/// Replace a value in a list with a new value.
+/// @access public
+/// @requires is-list
+///
+/// @param {list} $list - List to be manipulated.
+/// @param {*} $old-value - Old value to be replaced.
+/// @param {*} $new-value - New value to replace old value.
+/// @param {bool} $recursive - Wether or not it should traverse the list.
+/// @return {list}
+
+@function replace( $list, $old-value, $new-value, $recursive: false )
+{
+    @if empty( $list )
+    {
+        @return ();
+    }
+
+    $result: ();
+
+    @for $index from 1 through length( $list )
+    {
+        @if is-list( nth( $list, $index ) ) and $recursive
+        {
+            $result: append( $result, replace( nth( $list, $index ), $old-value, $new-value, $recursive ) );
+        }
+        @else
+        {
+            @if nth( $list, $index ) == $old-value
+            {
+                $result: append( $result, $new-value );
+            }
+            @else
+            {
+                $result: append( $result, nth( $list, $index ) );
+            }
+        }
+    }
+
+    @return $result;
+}

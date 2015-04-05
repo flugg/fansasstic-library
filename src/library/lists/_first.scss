@@ -1,0 +1,17 @@
+
+/// Retrieves the first item of the list.
+/// @access public
+/// @require {function} empty
+///
+/// @param {number} $list - List to be retrieved from.
+/// @return {*}
+
+@function first( $list )
+{
+    @if empty( $list )
+    {
+        @return null;
+    }
+
+    @return nth( $list, 1 );
+}

@@ -1,0 +1,30 @@
+
+/// Removes any duplicate values in a list.
+/// @access public
+/// @requires is-list
+///
+/// @param {list} $list - List to be manipulated.
+/// @param {boolean} $recursive - Wether or not it should traverse the list.
+/// @return {list}
+
+@function unique( $list, $recursive: false )
+{
+    $result: ();
+
+    @each $item in $list
+    {
+        @if not index( $result, $item )
+        {
+            @if is-list( $item ) and $recursive
+            {
+                $result: append( $result, unique( $item, $recursive ) );
+            }
+            @else
+            {
+                $result: append( $result, $item );
+            }
+        }
+    }
+
+    @return $result;
+}

@@ -1,0 +1,26 @@
+
+/// Sort the map numerically by its values.
+/// @access public
+/// @requires {function} sort
+///
+/// @param {map} $map - map to be sorted.
+/// @return {map}
+
+@function map-sort( $map )
+{
+    $sorted-map: ();
+    $sorted-values: sort( map-values( $map ) );
+
+    @each $sorted-value in $sorted-values
+    {
+        @each $key, $value in $map
+        {
+            @if $value == $sorted-value
+            {
+                $sorted-map: map-merge( $sorted-map, ( #{$key}: $value ) );
+            }
+        }
+    }
+
+    @return $sorted-map;
+}

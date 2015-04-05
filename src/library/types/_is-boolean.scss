@@ -1,0 +1,37 @@
+
+/// Checks if the value is of type bool.
+/// @access private
+///
+/// @param {*} $values - Value being checked.
+/// @return {bool}
+
+@function _is-boolean( $value )
+{
+    @return type-of( $value ) == 'bool';
+}
+
+/// Checks if the given value or values are of type bool.
+/// @access public
+///
+/// @param {*} $values - Value being checked.
+/// @return {bool}
+
+@function is-boolean( $values... )
+{
+    @each $value in $values
+    {
+        @if not _is-boolean( $value )
+        {
+            @return false;
+        }
+    }
+
+    @return true;
+}
+
+/// @alias is-boolean
+
+@function is-bool( $values... )
+{
+    @return is-boolean( $values... );
+}

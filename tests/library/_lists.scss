@@ -1,0 +1,333 @@
+@include test-module( 'Lists' )
+{
+    @include test( 'contains' )
+    {
+        @include assert( 'Test empty string', (
+            is-true: contains( ( '' ), '' )
+        ) );
+
+        @include assert( 'Test integers', (
+            is-true: contains( ( 0 1 2 ), 0 )
+        ) );
+
+        @include assert( 'Test strings', (
+            is-true: contains( ( 'a' 'b' 'c' ), 'a' )
+        ) );
+    }
+
+    @include test( 'empty' )
+    {
+        @include assert( 'Test empty string', (
+            is-false: empty( ( '' ) )
+        ) );
+
+        @include assert( 'Test single value', (
+            is-false: empty( 1 )
+        ) );
+
+        @include assert( 'Test integers', (
+            is-false: empty( ( 0 1 2 ) )
+        ) );
+
+        @include assert( 'Test strings', (
+            is-false: empty( ( 'a' 'b' 'c' ) )
+        ) );
+
+        @include assert( 'Test empty list', (
+            is-true: empty( () )
+        ) );
+    }
+
+    @include test( 'first' )
+    {
+        @include assert( 'Test empty list', (
+            action: first( () ), equal: null
+        ) );
+
+        @include assert( 'Test integers', (
+            action: first( ( 0 1 2 ) ), equal: 0
+        ) );
+
+        @include assert( 'Test strings', (
+            action: first( ( 'a' 'b' 'c' ) ), equal: 'a'
+        ) );
+    }
+
+    @include test( 'implode' )
+    {
+        @include assert( 'Test empty list', (
+            action: implode( () ), equal: ''
+        ) );
+
+        @include assert( 'Test integers', (
+            action: implode( 0 1 2 ), equal: '0 1 2'
+        ) );
+
+        @include assert( 'Test separator', (
+            action: implode( 0 1 2, '-' ), equal: '0-1-2'
+        ) );
+
+        @include assert( 'Test nested lists', (
+            action: implode( ( 0 1 2 ) ( 3 4 5 ) ), equal: '0 1 2 3 4 5'
+        ) );
+
+        @include assert( 'Test different depth lists', (
+            action: implode( 'a' 'b' 'c' ( 0 1 2 ) ), equal: 'a b c 0 1 2'
+        ) );
+
+        @include assert( 'Test different depth lists separator', (
+            action: implode( 'a' 'b' 'c' ( 0 1 2 ), '-' ), equal: 'a-b-c-0-1-2'
+        ) );
+    }
+
+    @include test( 'insert-nth' )
+    {
+        @include assert( 'Test empty list', (
+            action: insert-nth( (), 1, 1 ), equal: ()
+        ) );
+
+        @include assert( 'Test integers', (
+            action: insert-nth( ( 0 1 2 ), 2, 3 ), equal: ( 0 3 1 2 )
+        ) );
+
+        @include assert( 'Test strings', (
+            action: insert-nth( ( 'a' 'b' 'c' ), 2, 'd' ), equal: ( 'a' 'd' 'b' 'c' )
+        ) );
+
+        @include assert( 'Test list', (
+            action: insert-nth( ( 0 1 2 ), 2, ( 'a' 'b' 'c' ) ), equal: ( 0 ( 'a' 'b' 'c' ) 1 2 )
+        ) );
+    }
+
+    @include test( 'last' )
+    {
+        @include assert( 'Test empty list', (
+            action: last( () ), equal: null
+        ) );
+
+        @include assert( 'Test integers', (
+            action: last( ( 0 1 2 ) ), equal: 2
+        ) );
+
+        @include assert( 'Test strings', (
+            action: last( ( 'a' 'b' 'c' ) ), equal: 'c'
+        ) );
+    }
+
+    @include test( 'prepend' )
+    {
+        @include assert( 'Test empty list', (
+            action: prepend( (), 1 ), equal: 1
+        ) );
+
+        @include assert( 'Test integer', (
+            action: prepend( ( 0 1 2 ), 3 ), equal: ( 3 0 1 2 )
+        ) );
+
+        @include assert( 'Test string', (
+            action: prepend( ( 'a' 'b' 'c' ), 'd' ), equal: ( 'd' 'a' 'b' 'c' )
+        ) );
+
+        @include assert( 'Test list', (
+            action: prepend( ( 0 1 2 ), ( 3 4 5 ) ), equal: ( 3 4 5 0 1 2 )
+        ) );
+    }
+
+    @include test( 'remove' )
+    {
+        @include assert( 'Test empty list', (
+            action: remove( (), 1 ), equal: ()
+        ) );
+
+        @include assert( 'Test integers', (
+            action: remove( ( 0 1 2 ), 1 ), equal: ( 0 2 )
+        ) );
+
+        @include assert( 'Test strings', (
+            action: remove( ( 'a' 'b' 'c' ), 'a' ), equal: ( 'b' 'c' )
+        ) );
+
+        @include assert( 'Test list', (
+            action: remove( ( ( 0 1 2 ) ( 'a' 'b' 'c' ) ( 3 4 5 ) ), ( 'a' 'b' 'c' ) ), equal: ( ( 0 1 2 ) ( 3 4 5 ) )
+        ) );
+
+        @include assert( 'Test recursive', (
+            action: remove( ( 0 1 2 ( 0 1 2 ( 0 1 2 ) ) ), 1, true ), equal: ( 0 2 ( 0 2 ( 0 2 ) ) )
+        ) );
+    }
+
+    @include test( 'remove-nth' )
+    {
+        @include assert( 'Test empty list', (
+            action: remove-nth( (), 1 ), equal: ()
+        ) );
+
+        @include assert( 'Test integers', (
+            action: remove-nth( ( 0 1 2 ), 1 ), equal: ( 1 2 )
+        ) );
+
+        @include assert( 'Test strings', (
+            action: remove-nth( ( 'a' 'b' 'c' ), 1 ), equal: ( 'b' 'c' )
+        ) );
+
+        @include assert( 'Test list', (
+            action: remove-nth( ( ( 0 1 2 ) ( 'a' 'b' 'c' ) ( 3 4 5 ) ), 2 ), equal: ( ( 0 1 2 ) ( 3 4 5 ) )
+        ) );
+    }
+
+    @include test( 'replace' )
+    {
+        @include assert( 'Test empty list', (
+            action: replace( (), 1, 2 ), equal: ()
+        ) );
+
+        @include assert( 'Test integers', (
+            action: replace( ( 0 1 2 ), 1, 2 ), equal: ( 0 2 2 )
+        ) );
+
+        @include assert( 'Test strings', (
+            action: replace( ( 'a' 'b' 'c' ), 'a', 'b' ), equal: ( 'b' 'b' 'c' )
+        ) );
+
+        @include assert( 'Test list', (
+            action: replace( ( 0 1 2 ), 1, ( 'a' 'b' 'c' ) ), equal: ( 0 ( 'a' 'b' 'c' ) 2 )
+        ) );
+
+        @include assert( 'Test recursive', (
+            action: replace( ( 0 1 2 ( 0 1 2 ( 0 1 2 ) ) ), 1, 2, true ), equal: ( 0 2 2 ( 0 2 2 ( 0 2 2 ) ) )
+        ) );
+    }
+
+    @include test( 'replace-nth' )
+    {
+        @include assert( 'Test empty list', (
+            action: replace-nth( (), 1, 2 ), equal: ()
+        ) );
+
+        @include assert( 'Test integers', (
+            action: replace-nth( ( 0 1 2 ), 1, 2 ), equal: ( 2 1 2 )
+        ) );
+
+        @include assert( 'Test strings', (
+            action: replace-nth( ( 'a' 'b' 'c' ), 1, 'b' ), equal: ( 'b' 'b' 'c' )
+        ) );
+
+        @include assert( 'Test list', (
+            action: replace-nth( ( 0 1 2 ), 1, ( 'a' 'b' 'c' ) ), equal: ( ( 'a' 'b' 'c' ) 1 2 )
+        ) );
+    }
+
+    @include test( 'reverse' )
+    {
+        @include assert( 'Test empty list', (
+            action: reverse( () ), equal: ()
+        ) );
+
+        @include assert( 'Test integers', (
+            action: reverse( ( 0 1 2 ) ), equal: ( 2 1 0 )
+        ) );
+
+        @include assert( 'Test strings', (
+            action: reverse( ( 'a' 'b' 'c' ) ), equal: ( 'c' 'b' 'a' )
+        ) );
+
+        @include assert( 'Test nested list', (
+            action: reverse( ( 0 1 2 ( 0 1 2 ( 0 1 2 ) ) ) ), equal: ( ( 0 1 2 ( 0 1 2 ) ) 2 1 0 )
+        ) );
+
+        @include assert( 'Test recursive', (
+            action: reverse( ( 0 1 2 ( 0 1 2 ( 0 1 2 ) ) ), true ), equal: ( ( ( 2 1 0 ) 2 1 0 ) 2 1 0 )
+        ) );
+    }
+
+    @include test( 'rotate' )
+    {
+        @include assert( 'Test empty list', (
+            action: rotate( () ), equal: ()
+        ) );
+
+        @include assert( 'Test integers', (
+            action: rotate( ( 0 1 2 ) ), equal: ( 2 0 1 )
+        ) );
+
+        @include assert( 'Test strings', (
+            action: rotate( ( 'a' 'b' 'c' ) ), equal: ( 'c' 'a' 'b' )
+        ) );
+
+        @include assert( 'Test reversed rotation', (
+            action: rotate( ( 0 1 2 ), true ), equal: ( 1 2 0 )
+        ) );
+    }
+
+    @include test( 'slice' )
+    {
+        @include assert( 'Test empty list', (
+            action: slice( (), 1, 2 ), equal: ()
+        ) );
+
+        @include assert( 'Test integers', (
+            action: slice( ( 0 1 2 ), 1, 2 ), equal: ( 0 1 )
+        ) );
+
+        @include assert( 'Test strings', (
+            action: slice( ( 'a' 'b' 'c' ), 1, 2 ), equal: ( 'a' 'b' )
+        ) );
+
+        @include assert( 'Test lists', (
+            action: slice( ( ( 0 1 2 ) ( 'a' 'b' 'c' ) ( 3 4 5 ) ), 1, 2 ), equal: ( ( 0 1 2 ) ( 'a' 'b' 'c' ) )
+        ) );
+    }
+
+    @include test( 'sort' )
+    {
+        @include assert( 'Test empty list', (
+            action: sort( () ), equal: ()
+        ) );
+
+        @include assert( 'Test integers', (
+            action: sort( ( 1 0 2 ) ), equal: ( 0 1 2 )
+        ) );
+    }
+
+    @include test( 'swap' )
+    {
+        @include assert( 'Test empty list', (
+            action: swap( (), 1, 2 ), equal: ()
+        ) );
+
+        @include assert( 'Test integers', (
+            action: swap( ( 0 1 2 ), 1, 2 ), equal: ( 1 0 2 )
+        ) );
+
+        @include assert( 'Test strings', (
+            action: swap( ( 'a' 'b' 'c' ), 1, 2 ), equal: ( 'b' 'a' 'c' )
+        ) );
+
+        @include assert( 'Test lists', (
+            action: swap( ( ( 0 1 2 ) ( 'a' 'b' 'c' ) ( 3 4 5 ) ), 1, 2 ), equal: ( ( 'a' 'b' 'c' ) ( 0 1 2 ) ( 3 4 5 ) )
+        ) );
+    }
+
+    @include test( 'unique' )
+    {
+        @include assert( 'Test empty list', (
+            action: unique( () ), equal: ()
+        ) );
+
+        @include assert( 'Test without duplicate', (
+            action: unique( ( 0 1 2 ) ), equal: ( 0 1 2 )
+        ) );
+
+        @include assert( 'Test duplicate integers', (
+            action: unique( ( 0 1 1 2 ) ), equal: ( 0 1 2 )
+        ) );
+
+        @include assert( 'Test duplicate strings', (
+            action: unique( ( 'a' 'b' 'b' 'c' ) ), equal: ( 'a' 'b' 'c' )
+        ) );
+
+        @include assert( 'Test recursive', (
+            action: unique( ( 0 1 1 2 ( 0 1 1 2 ( 0 1 1 2 ) ) ), true ), equal: ( 0 1 2 ( 0 1 2 ( 0 1 2 ) ) )
+        ) );
+    }
+}

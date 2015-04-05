@@ -1,0 +1,71 @@
+@include test-module( 'Strings' )
+{
+    @include test( 'capitalize' )
+    {
+        @include assert( 'Test word', (
+            action: capitalize( 'hello' ), equal: 'Hello'
+        ) );
+
+        @include assert( 'Test sentence', (
+            action: capitalize( 'hello world' ), equal: 'Hello world'
+        ) );
+    }
+
+    @include test( 'capitalize-words' )
+    {
+        @include assert( 'Test word', (
+            action: capitalize-words( 'hello' ), equal: 'Hello'
+        ) );
+
+        @include assert( 'Test sentence', (
+            action: capitalize-words( 'hello world' ), equal: 'Hello World'
+        ) );
+    }
+
+    @include test( 'to-string' )
+    {
+        @include assert( 'Test string', (
+            action: to-string( 'a' ), equal: 'a'
+        ) );
+
+        @include assert( 'Test boolean', (
+            action: to-string( false ), equal: 'false'
+        ) );
+
+        @include assert( 'Test integer', (
+            action: to-string( 1 ), equal: '1'
+        ) );
+
+        @include assert( 'Test float', (
+            action: to-string( 1.1 ), equal: '1.1'
+        ) );
+
+        @include assert( 'Test unit', (
+            action: to-string( 1px ), equal: '1px'
+        ) );
+
+        @include assert( 'Test color', (
+            action: to-string( #333 ), equal: '#333'
+        ) );
+
+        @include assert( 'Test list', (
+            action: to-string( 0 1 2 ), equal: '( 0 1 2 )'
+        ) );
+
+        @include assert( 'Test multiple list', (
+            action: to-string( ( 0 1 2 ) ( 'a' 'b' 'c' ) ), equal: "( ( 0 1 2 ) ( a b c ) )"
+        ) );
+
+        @include assert( 'Test nested list', (
+            action: to-string( ( 0 ( 'a', 'b', 'c' ) 2 ) ), equal: "( 0 ( a b c ) 2 )"
+        ) );
+
+        @include assert( 'Test map', (
+            action: to-string( ( 'a': 0, 'b': 1, 'c': 2 ) ), equal: "( a: 0, b: 1, c: 2 )"
+        ) );
+
+        @include assert( 'Test nested maps', (
+            action: to-string( ( 'a': 0, 'b': ( 'd': 0, 'e': 1 ), 'c': 2 ) ), equal: "( a: 0, b: ( d: 0, e: 1 ), c: 2 )"
+        ) );
+    }
+}

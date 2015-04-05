@@ -1,0 +1,30 @@
+
+/// Checks if the value is an integer.
+/// @access private
+///
+/// @param {*} $values - Value being checked.
+/// @return {bool}
+
+@function _is-integer( $value )
+{
+    @return type-of( $value ) == 'number' and floor( abs( $value ) ) == abs( $value )
+}
+
+/// Checks if the given value or values are integers.
+/// @access public
+///
+/// @param {*} $values - Value being checked.
+/// @return {bool}
+
+@function is-integer( $values... )
+{
+    @each $value in $values
+    {
+        @if not _is-integer( $value )
+        {
+            @return false;
+        }
+    }
+
+    @return true;
+}

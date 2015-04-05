@@ -1,0 +1,390 @@
+@include test-module( 'Types' )
+{
+    @include test( 'is-boolean' )
+    {
+        @include assert( 'Test null', (
+            is-false: is-boolean( null )
+        ) );
+
+        @include assert( 'Test integer', (
+            is-false: is-boolean( 1 )
+        ) );
+
+        @include assert( 'Test float', (
+            is-false: is-boolean( 1.1 )
+        ) );
+
+        @include assert( 'Test unit', (
+            is-false: is-boolean( 1px )
+        ) );
+
+        @include assert( 'Test color', (
+            is-false: is-boolean( #111 )
+        ) );
+
+        @include assert( 'Test string', (
+                is-false: is-boolean( '1' )
+        ) );
+
+        @include assert( 'Test list', (
+            is-false: is-boolean( ( 0 1 2 ) )
+        ) );
+
+        @include assert( 'Test map', (
+            is-false: is-boolean( ( 'a': 0, 'b': 1, 'c': 2 ) )
+        ) );
+
+        @include assert( 'Test boolean (true)', (
+            is-true: is-boolean( true )
+        ) );
+
+        @include assert( 'Test boolean (false)', (
+            is-true: is-boolean( false )
+        ) );
+
+        @include assert( 'Test multiple arguments', (
+            is-true: is-boolean( true, false )
+        ) );
+    }
+
+    @include test( 'is-color' )
+    {
+        @include assert( 'Test null', (
+            is-false: is-color( null )
+        ) );
+
+        @include assert( 'Test boolean', (
+            is-false: is-color( true )
+        ) );
+
+        @include assert( 'Test integer', (
+            is-false: is-color( 1 )
+        ) );
+
+        @include assert( 'Test float', (
+            is-false: is-color( 1.1 )
+        ) );
+
+        @include assert( 'Test unit', (
+            is-false: is-color( 1px )
+        ) );
+
+        @include assert( 'Test string', (
+            is-false: is-color( '1' )
+        ) );
+
+        @include assert( 'Test list', (
+            is-false: is-color( ( 0 1 2 ) )
+        ) );
+
+        @include assert( 'Test map', (
+            is-false: is-color( ( 'a': 0, 'b': 1, 'c': 2 ) )
+        ) );
+
+        @include assert( 'Test color', (
+            is-true: is-color( #111 )
+        ) );
+
+        @include assert( 'Test multiple arguments', (
+            is-true: is-color( #111, #222, #333 )
+        ) );
+    }
+
+    @include test( 'is-float' )
+    {
+        @include assert( 'Test null', (
+            is-false: is-float( null )
+        ) );
+
+        @include assert( 'Test boolean', (
+            is-false: is-float( true )
+        ) );
+
+        @include assert( 'Test integer', (
+            is-false: is-float( 1 )
+        ) );
+
+        @include assert( 'Test unit', (
+            is-false: is-float( 1px )
+        ) );
+
+        @include assert( 'Test color', (
+            is-false: is-float( #111 )
+        ) );
+
+        @include assert( 'Test string', (
+            is-false: is-float( '1' )
+        ) );
+
+        @include assert( 'Test list', (
+            is-false: is-float( ( 0 1 2 ) )
+        ) );
+
+        @include assert( 'Test map', (
+            is-false: is-float( ( 'a': 0, 'b': 1, 'c': 2 ) )
+        ) );
+
+        @include assert( 'Test float', (
+            is-true: is-float( 1.1 )
+        ) );
+
+        @include assert( 'Test multiple arguments', (
+            is-true: is-float( 1.1, 2.1, 3.1 )
+        ) );
+    }
+
+    @include test( 'is-integer' )
+    {
+        @include assert( 'Test null', (
+            is-false: is-integer( null )
+        ) );
+
+        @include assert( 'Test boolean', (
+            is-false: is-integer( true )
+        ) );
+
+        @include assert( 'Test float', (
+            is-false: is-integer( 1.1 )
+        ) );
+
+        @include assert( 'Test color', (
+            is-false: is-integer( #111 )
+        ) );
+
+        @include assert( 'Test string', (
+            is-false: is-integer( '1' )
+        ) );
+
+        @include assert( 'Test list', (
+            is-false: is-integer( ( 0 1 2 ) )
+        ) );
+
+        @include assert( 'Test map', (
+            is-false: is-integer( ( 'a': 0, 'b': 1, 'c': 2 ) )
+        ) );
+
+        @include assert( 'Test integer', (
+            is-true: is-integer( 1 )
+        ) );
+
+        @include assert( 'Test unit', (
+            is-true: is-integer( 1px )
+        ) );
+
+        @include assert( 'Test multiple arguments', (
+            is-true: is-integer( 0, 1, 2 )
+        ) );
+    }
+
+    @include test( 'is-list' )
+    {
+        @include assert( 'Test null', (
+            is-false: is-list( null )
+        ) );
+
+        @include assert( 'Test boolean', (
+            is-false: is-list( true )
+        ) );
+
+        @include assert( 'Test integer', (
+            is-false: is-list( 1 )
+        ) );
+
+        @include assert( 'Test float', (
+            is-false: is-list( 1.1 )
+        ) );
+
+        @include assert( 'Test unit', (
+            is-false: is-list( 1px )
+        ) );
+
+        @include assert( 'Test color', (
+            is-false: is-list( #111 )
+        ) );
+
+        @include assert( 'Test string', (
+            is-false: is-list( '1' )
+        ) );
+
+        @include assert( 'Test list', (
+            is-true: is-list( ( 0 1 2 ) )
+        ) );
+
+        @include assert( 'Test multiple arguments', (
+            is-true: is-list( ( 0 1 2 ), ( 0 1 2 ) )
+        ) );
+    }
+
+    @include test( 'is-map' )
+    {
+        @include assert( 'Test null', (
+            is-false: is-map( null )
+        ) );
+
+        @include assert( 'Test boolean', (
+            is-false: is-map( true )
+        ) );
+
+        @include assert( 'Test integer', (
+            is-false: is-map( 1 )
+        ) );
+
+        @include assert( 'Test float', (
+            is-false: is-map( 1.1 )
+        ) );
+
+        @include assert( 'Test unit', (
+            is-false: is-map( 1px )
+        ) );
+
+        @include assert( 'Test color', (
+            is-false: is-map( #111 )
+        ) );
+
+        @include assert( 'Test string', (
+            is-false: is-map( '1' )
+        ) );
+
+        @include assert( 'Test list', (
+            is-false: is-map( ( 0 1 2 ) )
+        ) );
+
+        @include assert( 'Test map', (
+            is-true: is-map( ( 'a': 0, 'b': 1, 'c': 2 ) )
+        ) );
+
+        @include assert( 'Test multiple arguments', (
+            is-true: is-map( ( 'a': 0, 'b': 1, 'c': 2 ), ( 'a': 0, 'b': 1, 'c': 2 ) )
+        ) );
+    }
+
+    @include test( 'is-null' )
+    {
+        @include assert( 'Test boolean', (
+            is-false: is-null( true )
+        ) );
+
+        @include assert( 'Test integer', (
+            is-false: is-null( 1 )
+        ) );
+
+        @include assert( 'Test float', (
+            is-false: is-null( 1.1 )
+        ) );
+
+        @include assert( 'Test unit', (
+            is-false: is-null( 1px )
+        ) );
+
+        @include assert( 'Test color', (
+            is-false: is-null( #111 )
+        ) );
+
+        @include assert( 'Test string', (
+            is-false: is-null( '1' )
+        ) );
+
+        @include assert( 'Test list', (
+            is-false: is-null( ( 0 1 2 ) )
+        ) );
+
+        @include assert( 'Test map', (
+            is-false: is-null( ( 'a': 0, 'b': 1, 'c': 2 ) )
+        ) );
+
+        @include assert( 'Test multiple arguments', (
+            is-false: is-null( '1', '2', '3' )
+        ) );
+
+        @include assert( 'Test null', (
+            is-true: is-null( null )
+        ) );
+
+    }
+
+    @include test( 'is-number' )
+    {
+        @include assert( 'Test null', (
+            is-false: is-number( null )
+        ) );
+
+        @include assert( 'Test boolean', (
+            is-false: is-number( true )
+        ) );
+
+        @include assert( 'Test color', (
+            is-false: is-number( #111 )
+        ) );
+
+        @include assert( 'Test string', (
+            is-false: is-number( '1' )
+        ) );
+
+        @include assert( 'Test list', (
+            is-false: is-number( ( 0 1 2 ) )
+        ) );
+
+        @include assert( 'Test map', (
+            is-false: is-number( ( 'a': 0, 'b': 1, 'c': 2 ) )
+        ) );
+
+        @include assert( 'Test integer', (
+            is-true: is-number( 1 )
+        ) );
+
+        @include assert( 'Test float', (
+            is-true: is-number( 1.1 )
+        ) );
+
+        @include assert( 'Test unit', (
+            is-true: is-number( 1px )
+        ) );
+
+        @include assert( 'Test multiple arguments', (
+            is-true: is-number( 0, 1, 2 )
+        ) );
+    }
+
+    @include test( 'is-string' )
+    {
+        @include assert( 'Test null', (
+            is-false: is-string( null )
+        ) );
+
+        @include assert( 'Test boolean', (
+            is-false: is-string( true )
+        ) );
+
+        @include assert( 'Test integer', (
+            is-false: is-string( 1 )
+        ) );
+
+        @include assert( 'Test float', (
+            is-false: is-string( 1.1 )
+        ) );
+
+        @include assert( 'Test unit', (
+            is-false: is-string( 1px )
+        ) );
+
+        @include assert( 'Test color', (
+            is-false: is-string( #111 )
+        ) );
+
+        @include assert( 'Test list', (
+            is-false: is-string( ( 0 1 2 ) )
+        ) );
+
+        @include assert( 'Test map', (
+            is-false: is-string( ( 'a': 0, 'b': 1, 'c': 2 ) )
+        ) );
+
+        @include assert( 'Test string', (
+            is-true: is-string( '1' )
+        ) );
+
+        @include assert( 'Test multiple arguments', (
+            is-true: is-string( '1', '2', '3' )
+        ) );
+    }
+}

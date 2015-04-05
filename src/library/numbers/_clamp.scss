@@ -1,0 +1,16 @@
+
+/// Clamps a given number between a given range.
+/// @access public
+///
+/// @param {number} $number - Number to be clamped.
+/// @param {number} $min - Minimum value.
+/// @param {number} $max - Maximum value.
+/// @return {number}
+
+@function clamp( $number, $min, $max )
+{
+    $min: min( $min, $max );
+    $max: max( $min, $max );
+
+    @return if( $number > $max, $max, if( $number < $min, $min, $number ) );
+}

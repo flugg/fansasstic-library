@@ -1,0 +1,20 @@
+
+/// Sort the map numerically by its values.
+/// @access public
+/// @requires {function} sort
+///
+/// @param {list} $keys - list of keys to create the map from
+/// @param {list} $values - list of values to create the map from
+/// @return {map}
+
+@function map-zip( $keys, $values )
+{
+    $result: ();
+
+    @for $index from 1 through length( $keys )
+    {
+        $result: map-merge( $result, ( #{nth( $keys, $index )}: nth( $values, $index ) ) );
+    }
+
+    @return $result;
+}

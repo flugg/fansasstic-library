@@ -1,0 +1,13 @@
+
+/// Substracts all values of a map or list, or even just a number.
+/// @access public
+/// @requires {function} _calculate
+///
+/// @param {map|list|number} $minuend - Value to be added to.
+/// @param {map|list|number} $subtrahend - Value to add by.
+/// @return {number}
+
+@function substract( $minuend, $subtrahend )
+{
+    @return _calculate( $minuend, $subtrahend, 'substract' );
+}

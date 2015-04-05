@@ -1,0 +1,20 @@
+@include test-module( 'Maps' )
+{
+    @include test( 'map-sort' )
+    {
+        @include assert( 'Test sorted map', (
+            action: map-sort( ( 'a': 0, 'b': 1, 'c': 2 ) ), equal: ( 'a': 0, 'b': 1, 'c': 2 )
+        ) );
+
+        @include assert( 'Test unsorted map', (
+            action: map-sort( ( 'a': 2, 'b': 0, 'c': 1 ) ), equal: ( 'b': 0, 'c': 1, 'a': 2 )
+        ) );
+    }
+
+    @include test( 'map-zip' )
+    {
+        @include assert( 'Test map', (
+            action: map-zip( ( 'a' 'b' 'c' ), ( 0 1 2 ) ), equal: ( 'a': 0, 'b': 1, 'c': 2 )
+        ) );
+    }
+}

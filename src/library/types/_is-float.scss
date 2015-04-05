@@ -1,0 +1,30 @@
+
+/// Checks if the value is a float.
+/// @access private
+///
+/// @param {*} $values - Value being checked.
+/// @return {bool}
+
+@function _is-float( $value )
+{
+    @return type-of( $value ) == 'number' and floor( abs( $value ) ) != abs( $value )
+}
+
+/// Checks if the given value or values are floats.
+/// @access public
+///
+/// @param {*} $values - Value being checked.
+/// @return {bool}
+
+@function is-float( $values... )
+{
+    @each $value in $values
+    {
+        @if not _is-float( $value )
+        {
+            @return false;
+        }
+    }
+
+    @return true;
+}
