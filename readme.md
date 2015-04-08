@@ -3,10 +3,11 @@ Fansasstic Library
 
 Fansasstic Library is included as a dependency by the [Fansasstic framework](http://github.com/flugger/fansasstic) and is a Sass library of functions that essentially extends the Sass language. The library consists of functions that manipulate different data types, like strings, lists and maps. It also brings some useful math functions, among others the possibility to multiply all values in a list or map with a number, or even with another list or map - same goes for all basic arithmetic operations. 
 
-A lot of the functions are much inspired by libraries made by [Hugo Giraudel](https://github.com/HugoGiraudel), more particularly [SassyLists](https://github.com/at-import/SassyLists).
+Many of the functions draw inspiration from libraries made by [Hugo Giraudel](https://github.com/HugoGiraudel), particularly [SassyLists](https://github.com/at-import/SassyLists).
 
 ## Philosofy
-There are tons of Sass libraries out there, some of which are very robust and well tested. Why another Sass library? Well, instead of importing tons of different libraries for every new Sass project I started, I was looking for a more unified experience. I wanted an extensive library that made Sass even stronger than it already is, by including many useful functions that Sass doesn't already bring out of the box. 
+There are tons of Sass libraries out there, many of which are very robust and well tested. So why have I made another one? 
+Instead of importing tons of different libraries for every new Sass project I started, I was looking for a more unified experience. I wanted an extensive library that made Sass even stronger than it already is, by including many useful functions that the language doesn't already bring out of the box. 
 
 ## Installing
 If you want to install the Fansasstic framework (which automatically installs this repository as a dependency), you should head to [this repository](http://github.com/flugger/fansasstic). You can aso install the Fansasstic Library as a standalone library; choose your prefered way of installing:
