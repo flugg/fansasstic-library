@@ -1,7 +1,12 @@
 Fansasstic Library
 ======
 
-Fansasstic Library is included as a dependency by the [Fansasstic framework](http://github.com/flugger/fansasstic) and is a Sass library of functions that existentially extends the Sass language. The library consists of functions that manipulate different data types, like strings, lists and maps. It also brings some useful math functions, for instance the possibility to multiply all values in a list or map by a multiplier, or even multiply it by another list or map - same goes for all basic arithmetic operations. A lot of the functions are much inspired by libraries made by [Hugo Giraudel](https://github.com/HugoGiraudel), more particularly [SassyLists](https://github.com/at-import/SassyLists).
+Fansasstic Library is included as a dependency by the [Fansasstic framework](http://github.com/flugger/fansasstic) and is a Sass library of functions that existentially extends the Sass language. The library consists of functions that manipulate different data types, like strings, lists and maps. It also brings some useful math functions, for among others the possibility to multiply all values in a list or map by a multiplier, or even by another list or map - same goes for all basic arithmetic operations. 
+
+A lot of the functions are much inspired by libraries made by [Hugo Giraudel](https://github.com/HugoGiraudel), more particularly [SassyLists](https://github.com/at-import/SassyLists).
+
+## Philosofy
+There are tons of Sass libraries out there, some of which are very robust and well tested. Why another Sass library? Well, instead of importing tons of different libraries for every new Sass project I started, I was looking for a more unified experience. I wanted an extensive library that made Sass even stronger than it already is, by including many useful functions that Sass doesn't already bring out of the box. 
 
 ## Installing
 If you want to install the Fansasstic framework (which automatically installs this repository as a dependency), you should head to [this repository](http://github.com/flugger/fansasstic). You can aso install the Fansasstic Library as a standalone library; choose your prefered way of installing:
@@ -15,9 +20,6 @@ bower install fansasstic-library --save-dev
 ```
 npm install fansasstic-library --save-dev
 ```
-
-## Philosofy
-There are tons of Sass libraries out there, some of which are very robust and well tested. Why another Sass library? Well, instead of importing tons of different libraries for every new Sass project I started, I was looking for a more unified experience. I wanted an extensive library that made Sass even stronger than it already is, by including many useful functions that Sass doesn't already bring out of the box. 
 
 __Note:__ The library doesn't use namespaces on function names because I wanted it to streamline it as much as possible with the exisiting functions Sass brings by default. This may cause collision with existing function names if you're going to use the library with other Sass libraries that doesn't use namespaces or you create your own custom functions, so please be aware of that.
 
