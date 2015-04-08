@@ -1,7 +1,7 @@
 Fansasstic Library
 ======
 
-Fansasstic Library is included as a dependency by the [Fansasstic framework](http://github.com/flugger/fansasstic) and is a Sass library of functions that essentially extends the Sass language. The library consists of functions that manipulate different data types, like strings, lists and maps. It also brings some useful math functions, among others the possibility to multiply all values in a list or map by a multiplier, or even by another list or map - same goes for all basic arithmetic operations. 
+Fansasstic Library is included as a dependency by the [Fansasstic framework](http://github.com/flugger/fansasstic) and is a Sass library of functions that essentially extends the Sass language. The library consists of functions that manipulate different data types, like strings, lists and maps. It also brings some useful math functions, among others the possibility to multiply all values in a list or map with a number, or even with another list or map - same goes for all basic arithmetic operations. 
 
 A lot of the functions are much inspired by libraries made by [Hugo Giraudel](https://github.com/HugoGiraudel), more particularly [SassyLists](https://github.com/at-import/SassyLists).
 
