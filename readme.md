@@ -6,9 +6,12 @@ Fansasstic Library is included as a dependency by the [Fansasstic framework](htt
 Many of the functions draw inspiration from libraries made by [Hugo Giraudel](https://github.com/HugoGiraudel), particularly [SassyLists](https://github.com/at-import/SassyLists).
 
 ## Philosofy
-There are tons of Sass libraries out there, many of which are very robust and well tested. So why have I made another one? 
+__There are tons of Sass libraries out there, many of which are very robust and well tested. So why have I made another one?__
 
-Instead of importing tons of different libraries for every new Sass project I started, I was looking for a more unified experience. I wanted an extensive library that made Sass even stronger than it already is, by including many useful functions that the language doesn't already bring out of the box. 
+When creating new Sass projects I found myself importing new libraries constantly, each designed to perform specific tasks. I regularly found myself with a lot of different depedencies, and wanted a library that was easier to maintain. In addition, I wanted a library that expanded Sass' functional capabilities, to make my development process easier and my code more structured. 
+
+Initially, when using the library in my personal projects, I would simply move and adapt the source code from my last project to a new one. As one might imagine, this lead to alot of different implementations, versions and functions, scattered throughout. Instead, I wanted to be able to keep track of the different versions and changes, and import the library through a package manager.
+
 
 ## Installing
 If you want to install the Fansasstic framework (which automatically installs this repository as a dependency), you should head to [this repository](http://github.com/flugger/fansasstic). You can aso install the Fansasstic Library as a standalone library; choose your prefered way of installing:
