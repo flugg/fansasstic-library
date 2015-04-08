@@ -47,6 +47,7 @@ Once you've installed the library, you can import the manifest file by writing t
 ## Getting started
 Once you've imported the manifest file you will have access to the entire Fansasstic library and be able to do some pretty crazy stuff. It has tons of functions to manipulate different data types and makes working with maps a joy.
 
+#### Maps
 Take the native Sass function _map-get_, which takes two arguments; a reference to the map and a string representing a key. However, if you have have a nested map there are no ways to retrieve inner values without looping through the map manually. The Fansasstic library solves this by delivering a much more powerful _get_ function. Let me show you!   
 
 Let's say you have the following map:
@@ -66,12 +67,13 @@ There are no easy way to get the values of _bar_ or _baz_ with _map-get_, luckil
 $value: get( $map, 'foo.bar' );
 ```
 
-That will set the value of the variable _$value_ to __1__. Pretty easy, right? And you can go deeper down the tree with more dots indefinitely. And as you might have guesed, it has the same way to set values to nested keys:
+That will set the value of the variable _$value_ to 1. Pretty easy, right? And you can go deeper down the tree with more dots indefinitely. And as you might have guesed, it has the same way to set values to nested keys:
 
 ```scss
 $map: set( $map, 'foo.bar', 3 );
 ```
 
+#### Math 
 It can also do some pretty awesome stuff manipulating maps using basic mathematics. Let's multiply all values in _$map_ by __10__:
 
 ```scss
@@ -97,7 +99,7 @@ $map: subtract( $map, 10 );
 $map: divide( $map, 10 );
 ```
 
-This might seem pointless at first, but if you use maps for storing your variables at different breakpoints it shows extremely useful, especially when you can take use of adding or multiplying maps with maps. Yes, you heard me right, you can use a map instead of a number as a multiplier where it does calculations on identical key names. Let me demonstrate:
+This might seem pointless at first, but if you use maps for storing your variables at different breakpoints it becomes extremely useful, especially when you can take use of adding or multiplying maps with other maps. Yes, you heard me right, you can use a map instead of a number as a multiplier where it does calculations on identical key names. Let me demonstrate:
 
 ```scss
 $spacing: (
@@ -112,7 +114,7 @@ $height: (
 );
 ```
 
-We have two maps, where both are representing one value at different breakpoint states. If we want to add a height to an element that is identical to $height - $spacing * 2. This becomes very hard to do when $spacing and $height represent different values. Luckily the Fansasstic library has us covered yet again:
+We have two maps, where both are representing values at different breakpoint states. Say we want to add a height to an element that is identical to $height - $spacing * 2. This becomes extremely hard to do when $spacing and $height represent different values. Luckily the Fansasstic library has us covered yet again:
 
 ```scss
 $result: subtract( $height, multiply( $spacing, 2 ) );
