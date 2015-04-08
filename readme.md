@@ -7,6 +7,7 @@ Many of the functions draw inspiration from libraries made by [Hugo Giraudel](ht
 
 ## Philosofy
 There are tons of Sass libraries out there, many of which are very robust and well tested. So why have I made another one? 
+
 Instead of importing tons of different libraries for every new Sass project I started, I was looking for a more unified experience. I wanted an extensive library that made Sass even stronger than it already is, by including many useful functions that the language doesn't already bring out of the box. 
 
 ## Installing
