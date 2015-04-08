@@ -5,45 +5,51 @@ Fansasstic Library is included as a dependency by the [Fansasstic framework](htt
 
 Many of the functions draw inspiration from libraries made by [Hugo Giraudel](https://github.com/HugoGiraudel), particularly [SassyLists](https://github.com/at-import/SassyLists).
 
-## Philosofy
+## Philosophy
 __There are tons of Sass libraries out there, many of which are very robust and well tested. So why have I made another one?__
 
 When creating new Sass projects I found myself importing new libraries constantly, each designed to perform specific tasks. I regularly found myself with a lot of different depedencies, and wanted a library that was easier to maintain. In addition, I wanted a library that expanded Sass' functional capabilities, to make my development process easier and my code more structured. 
 
 Initially, when using the library in my personal projects, I would simply move and adapt the source code from my last project to a new one. As one might imagine, this lead to alot of different implementations, versions and functions, scattered throughout. Instead, I wanted to be able to keep track of the different versions and changes, and import the library through a package manager.
 
+And so, the Fansasstic library was born.
 
 ## Installing
-If you want to install the Fansasstic framework (which automatically installs this repository as a dependency), you should head to [this repository](http://github.com/flugger/fansasstic). You can aso install the Fansasstic Library as a standalone library; choose your prefered way of installing:
+_If you already have the [Fansasstic framework](http://github.com/flugger/fansasstic) installed, it already has the Fansasstic library installed through its dependencies._  
 
-### Bower
+You can install the Fansasstic library as a stand-alone library using either Bower or Node: 
+
+#### Bower
 ```
 bower install fansasstic-library --save-dev
 ```
 
-### Node
+#### Node
 ```
 npm install fansasstic-library --save-dev
 ```
 
-__Note:__ The library doesn't use namespaces on function names because I wanted it to streamline it as much as possible with the exisiting functions Sass brings by default. This may cause collision with existing function names if you're going to use the library with other Sass libraries that doesn't use namespaces or you create your own custom functions, so please be aware of that.
+*__Note:__ The Fansasstic library doesn't use namespaces on function names in an attempt to streamline it with Sass' default functions. This may cause collisions with existing function names either from other libraries or your own code.*
 
-## Get started
-Once you've installed the library through Bower or Node, you can import the manifest file at the top of your Sass file:
+## Import
+Once you've installed the library, you can import the manifest file by writing the following at the top of your Sass file:
 
+#### Bower 
 ```scss
 @import 'bower_components/fansasstic-library/src/manifest';
 ```
 
-Alternatively, if you use Node:
-
+#### Node 
 ```scss
 @import 'node_modules/fansasstic-library/src/manifest';
 ```
 
-Once you've imported the manifest file you will have access to the entire Fansasstic library and be able to do some pretty crazy stuff. It has tons of functions to manipulate strings and lists and makes working with maps a true charm.
+## Getting started
+Once you've imported the manifest file you will have access to the entire Fansasstic library and be able to do some pretty crazy stuff. It has tons of functions to manipulate different data types and makes working with maps a joy.
 
-Take the native _map-get_ function, it has two parameters, a reference to the map and a string; the key which has the value you want. However, if you have have a nested map there are no ways to retrieve deeper values without looping through the map extensively. Fansasstic Library solves this by bringing a much more powerful _get_ function to the table. Let me show you! Let's say you have the following map:
+Take the native Sass function _map-get_, which takes two arguments; a reference to the map and a string representing a key. However, if you have have a nested map there are no ways to retrieve inner values without looping through the map manually. The Fansasstic library solves this by delivering a much more powerful _get_ function. Let me show you!   
+
+Let's say you have the following map:
 
 ```scss
 $map: (
