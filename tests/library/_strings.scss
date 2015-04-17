@@ -22,6 +22,20 @@
         ) );
     }
 
+    @include test( 'explode' )
+    {
+        @include assert( 'Test empty string', (
+                action: explode( '' ), equal: ()
+        ) );
+        @include assert( 'Test string', (
+                action: explode( 'a b c' ), equal: 'a' 'b' 'c'
+        ) );
+
+        @include assert( 'Test separator', (
+                action: explode( 'a-b-c', '-' ), equal: 'a' 'b' 'c'
+        ) );
+    }
+
     @include test( 'to-string' )
     {
         @include assert( 'Test string', (

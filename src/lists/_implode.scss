@@ -5,7 +5,7 @@
 ///
 /// @param {list} $list - List to be converted.
 /// @param {string} $separator - String to separate list items.
-/// @return {list}
+/// @return {string}
 
 @function implode( $list, $separator: ' ' )
 {

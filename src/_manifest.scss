@@ -29,6 +29,7 @@
 @import 'numbers/clamp';
 @import 'numbers/strip-unit';
 
+@import 'maps/get';
 @import 'maps/map-sort';
 @import 'maps/map-zip';
 
@@ -40,4 +41,5 @@
 
 @import 'strings/capitalize';
 @import 'strings/capitalize-words';
+@import 'strings/explode';
 @import 'strings/to-string';

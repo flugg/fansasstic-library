@@ -1,5 +1,24 @@
 @include test-module( 'Maps' )
 {
+    @include test( 'get' )
+    {
+        @include assert( 'Test map', (
+            action: get( ( 'a': 0, 'b': 1, 'c': 2 ), 'a' ), equal: 0
+        ) );
+
+        @include assert( 'Test nested map', (
+            action: get( ( 'a': ( 'b': ( 'c': 2 ) ) ), 'a.b.c' ), equal: 2
+        ) );
+
+        @include assert( 'Test inner value', (
+            action: get( ( 'a': ( 'b': ( 'c': 2 ) ) ), 'a.b' ), equal: ( 'c': 2 )
+        ) );
+
+        @include assert( 'Test alternative syntax', (
+            action: get( ( 'a': ( 'b': ( 'c': 2 ) ) ), 'a', 'b', 'c' ), equal: 2
+        ) );
+    }
+
     @include test( 'map-sort' )
     {
         @include assert( 'Test sorted map', (
