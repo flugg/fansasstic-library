@@ -1,0 +1,27 @@
+/// List that stores all error messages, the ones under are the default
+/// ones, but they can be overwritten and more can be added.
+/// @access private
+
+$_error-messages: (
+    'invalid-error': '{error} is not a valid error key.',
+    'invalid-type':  '{value} is of type {value-type}, {type} expected for function {function}()',
+    'below-range':   '{value} must be above {min} for function {function}()',
+    'above-range':   '{value} must be below {max} for function {function}()',
+    'outside-range': '{value} must be between {min} and {max} for function {function}()'
+);
+
+/// Parses the curly brace placeholders in the error messages with
+/// data, which is provided as a map where each key represents
+/// the placeholders and the values what will override them.
+/// @access private
+
+@function _parse-message( $message, $data )
+{
+    @each $key, $value in $data
+    {
+        $key: "{" + $key + "}";
+        $message: str-replace( $message, $key, $value );
+    }
+
+    @return $message;
+}

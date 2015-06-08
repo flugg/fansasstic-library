@@ -1,0 +1,24 @@
+
+/// Pull a value from a map from the given key. You can use multiple
+/// arguments for nested keys or as dot notation.
+/// @access public
+/// @requires {function} explode
+///
+/// @param {map} $map - map to be retrieved from.
+/// @param {string} $keys - keys to retrieve value from.
+/// @return {map}
+
+@function pull( $map, $keys... )
+{
+    @if length( $keys ) == 1
+    {
+        $keys: explode( nth( $keys, 1 ), '.' );
+    }
+
+    @each $key in $keys
+    {
+        $map: map-get( $map, $key );
+    }
+
+    @return $map;
+}

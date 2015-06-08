@@ -1,0 +1,29 @@
+
+/// Capitalizes the first letter of a string.
+/// @access private
+///
+/// @param {*} $string - String to be manipulated.
+/// @return {bool}
+
+@function _capitalize( $string )
+{
+    @return to-upper-case( str-slice( $string, 1, 1 ) ) + str-slice( $string, 2 );
+}
+
+/// Capitalizes the first letter of a string.
+/// @access public
+///
+/// @param {*} $string - String to be manipulated.
+/// @return {bool}
+
+@function capitalize( $string )
+{
+    @return _capitalize( $string );
+}
+
+/// @alias capitalize
+
+@function ucfirst( $args... )
+{
+    @return capitalize( $args... );
+}

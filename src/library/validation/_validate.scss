@@ -1,0 +1,29 @@
+@function validate( $variable, $rules... )
+{
+    $validations: ();
+
+    @each $rule in $rules
+    {
+        @return _validate( $variable, $rule );
+    }
+
+    @return $validations;
+}
+
+@function _validate( $variable, $rule )
+{
+    $validation: ();
+
+    @if map-has-key( $_validation-rules, $rule )
+    {
+        $function: pull( $_validation-rules, '#{$rule}.function' );
+
+        $validation: (
+            'value': $variable,
+            'rule': $rule,
+            'passed': call( $function, $variable )
+        );
+    }
+
+    @return $validation;
+}

@@ -1,0 +1,23 @@
+
+/// Gives the depth of the given map, in other words
+/// the number of levels of nested maps.
+/// @access public
+/// @requires {function} is-map
+///
+/// @param {map} $map - map to be checked.
+/// @return {number}
+
+@function depth( $map )
+{
+    $level-count: 1;
+
+    @each $key, $value in $map
+    {
+        @if is-map( $value )
+        {
+            $level-count: max( depth( $value ) + 1, $level-count );
+        }
+    }
+
+    @return $level-count;
+}

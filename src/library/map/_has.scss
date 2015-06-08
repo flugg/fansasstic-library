@@ -1,0 +1,94 @@
+
+/// Checks if a map has a given key. If a list of keys has been passed
+/// in we'll look for each key, searching one level at a time.
+/// @access private
+/// @requires {function} is-list
+/// @requires {function} is-map
+/// @requires {function} remove-nth
+///
+/// @param {map} $map - map to be checked.
+/// @return {number}
+
+@function _has-key( $map, $keys )
+{
+    $search-key: $keys;
+    $multiple: length( $keys ) > 1;
+
+    // If a list of keys has been passed in, we'll set the search key
+    // as the first item in the list and then shift the item from
+    // the original list if there are than one item in the list.
+    @if is-list( $keys )
+    {
+        $search-key: nth( $keys, 1 );
+
+        @if $multiple
+        {
+            $keys: remove-nth( $keys, 1 );
+        }
+    }
+
+    @each $key, $value in $map
+    {
+        // If we're only looking for a single key we will break
+        // and return true as soon as a matching key has been
+        // found in the current level of the given map.
+        @if not $multiple and $key == $search-key
+        {
+            @return true;
+        }
+
+        // If the value of the map is of type map we will call
+        // the same function recursively where the given map
+        // is the value and the given keys is the key rest.
+        @if is-map( $value ) and _has-key( $value, $keys )
+        {
+            // If we're only looking for a single value we will just
+            // return true, else we will only return true if the
+            // key in the map actually match the search key.
+            @if not $multiple or $key == $search-key
+            {
+                @return true;
+            }
+        }
+    }
+
+    @return false;
+}
+
+/// Checks if a map has a given key or keys. You can also
+/// specify nested keys using dot notation.
+/// @access private
+/// @requires {function} explode
+///
+/// @param {map} $map - map to be checked in.
+/// @param {string|list} $keys - key or keys to be checked.
+/// @return {number}
+
+@function _has( $map, $keys )
+{
+    @each $key in $keys
+    {
+        //
+        $key: explode( $key, '.' );
+
+        @if not _has-key( $map, $key )
+        {
+            @return false;
+        }
+    }
+
+    @return true;
+}
+
+/// Checks if a map has a given key or keys. You can also
+/// specify nested keys using dot notation.
+/// @access public
+/// @requires {function} explode
+///
+/// @param {map} $map - map to be checked.
+/// @return {number}
+
+@function has( $map, $keys )
+{
+    @return _has( $map, $keys );
+}

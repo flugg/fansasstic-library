@@ -1,0 +1,50 @@
+/// Inserts a value at a specified index in the given list.
+/// @access public
+/// @require {Function} is-empty
+///
+/// @param {List} $list - List to be reversed.
+/// @param {Number} $index - The specified index.
+/// @param {*} $value - The value to be inserted.
+/// @return {List}
+
+@function insert-at( $list, $index, $value )
+{
+    @return _insert-at( $list, $index, $value );
+}
+
+/// @alias contains
+
+@function insert-nth( $args... )
+{
+    @return insert-at( $args... );
+}
+
+/// @access private
+
+@function _insert-at( $list, $nth, $value )
+{
+    // If the list specified has no items we will simply
+    // return an empty list, this way you can always
+    // expect a string result from a function call.
+    @if is-empty( $list )
+    {
+        @return ();
+    }
+
+    $result: ();
+
+    // We compare each index of our list to our nth value,
+    // if they match we add our value to a result list,
+    // else we just add the item at the given index.
+    @for $index from 1 through length( $list )
+    {
+        @if $index == $nth
+        {
+            $result: append( $result, $value );
+        }
+
+        $result: append( $result, nth( $list, $index ) );
+    }
+
+    @return $result;
+}

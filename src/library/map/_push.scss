@@ -1,0 +1,38 @@
+
+/// Pushes a key-value pair into a given map. You can also push it to inner
+/// keys using dot notation if you have a multi-dimensional map. It's basically
+/// just an alternative syntax for Sass' map-merge.
+/// @access public
+/// @requires {function} explode
+/// @requires {function} pull
+/// @requires {function} remove-nth
+/// @requires {function} reverse
+///
+/// @param {map} $map - map to be retrieved from.
+/// @param {string} $keys - keys to retrieve value from.
+/// @return {map}
+
+@function push( $map, $key, $value )
+{
+    $keys: explode( $key, '.' );
+
+    @if length( $keys ) == 1
+    {
+        @return map-merge( $map, ( #{$key}: $value ) );
+    }
+
+    $merge-map: ();
+    $key-rest: $keys;
+
+    @each $inner-key in reverse( $keys )
+    {
+        @if length( $key-rest ) > 1
+        {
+            $inner-value: if( length( $key-rest ) == length( $keys ), $value, pull( $map, implode( $key-rest ) ) );
+            $key-rest: remove-nth( $key-rest, length( $key-rest ) );
+            $merge-map: map-merge( pull( $map, implode( $key-rest, '.' ) ), ( '#{unquote( $inner-key )}': $inner-value ) );
+        }
+    }
+
+    @return map-merge( $map, ( #{$key-rest}: $merge-map ) );
+}

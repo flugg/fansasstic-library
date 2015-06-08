@@ -1,0 +1,40 @@
+/// Reverses the order of all items in a list.
+/// @access public
+/// @require {Function} is-empty
+/// @require {Function} is-list
+///
+/// @param {List} $list - List to be reversed.
+/// @param {Bool} $recursive - Wether or not it should traverse the list.
+/// @return {List}
+
+@function reverse( $list, $recursive: false )
+{
+    @return _reverse( $list, $recursive );
+}
+
+/// @access private
+
+@function _reverse( $list, $recursive )
+{
+    @if is-empty( $list )
+    {
+        @return ();
+    }
+
+    $result: ();
+
+    // We loop through the indexes in our list from the last to
+    // the first and store an item variable based on the index
+    // at the absolute value of the current loop value.
+    @for $index from length( $list ) * -1 through -1
+    {
+        $item: nth( $list, abs( $index ) );
+
+        // If the item is a list and recursive is true we will append
+        // the result of the reversed item to our result list. Else
+        // we will just append the item at the current index.
+        $result: append( $result, if( is-list( $item ) and $recursive, _reverse( $item, $recursive ), $item ) );
+    }
+
+    @return $result;
+}

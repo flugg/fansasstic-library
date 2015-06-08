@@ -1,21 +1,102 @@
 @include test-module( 'Maps' )
 {
-    @include test( 'get' )
+    @include test( 'depth' )
+    {
+        @include assert( 'Test one level', (
+            action: depth( ( 'a': 0, 'b': 1, 'c': 2 ) ), equal: 1
+        ) );
+
+        @include assert( 'Test multiple levels', (
+            action: depth( ( 'a': 0, 'b': 1, 'c': ( 'a': 0, 'b': ( 'a': 2 ) ) ) ) , equal: 3
+        ) );
+
+        @include assert( 'Test multiple nested maps first', (
+            action: depth( ( 'a': ( 'a': 0, 'b': ( 'a': 0 ) ), 'b': ( 'a': 0, 'b': 1 ), 'c': 2 ) ), equal: 3
+        ) );
+
+        @include assert( 'Test multiple nested maps last', (
+            action: depth( ( 'a': 0, 'b': ( 'a': 0, 'b': 1 ), 'c': ( 'a': 0, 'b': ( 'a': 0 ) ) ) ) , equal: 3
+        ) );
+    }
+
+    @include test( 'has' )
     {
         @include assert( 'Test map', (
-            action: get( ( 'a': 0, 'b': 1, 'c': 2 ), 'a' ), equal: 0
+            is-true: has( ( 'a': 0, 'b': 1, 'c': 2 ), 'b' )
         ) );
 
         @include assert( 'Test nested map', (
-            action: get( ( 'a': ( 'b': ( 'c': 2 ) ) ), 'a.b.c' ), equal: 2
+            is-true: has( ( 'a': 0, 'b': 1, 'c': ( 'd': 0, 'e': 1, 'f': 2 ) ), 'e' )
+        ) );
+
+        @include assert( 'Test multiple keys', (
+            is-true: has( ( 'a': 0, 'b': 1, 'c': 2 ), ( 'a', 'b' ) )
+        ) );
+
+        @include assert( 'Test multiple keys with nested map', (
+            is-true: has( ( 'a': 0, 'b': 1, 'c': ( 'd': 0, 'e': 1, 'f': 2 ) ), ( 'b', 'e' ) )
+        ) );
+
+        @include assert( 'Test nested map with dot notation', (
+            is-true: has( ( 'a': 0, 'b': 1, 'c': ( 'd': 0, 'e': ( 'g': 0, 'h': 1 ), 'f': 2 ) ), 'c.e.g' )
+        ) );
+
+        @include assert( 'Test not has key', (
+            is-false: has( ( 'a': 0, 'b': 1, 'c': 2 ), 'd' )
+        ) );
+
+        @include assert( 'Test nested map not has key', (
+            is-false: has( ( 'a': 0, 'b': 1, 'c': ( 'd': 0, 'e': 1, 'f': 2 ) ), 'g' )
+        ) );
+
+        @include assert( 'Test multiple keys with nested map not has key', (
+            is-false: has( ( 'a': 0, 'b': 1, 'c': ( 'd': 0, 'e': 1, 'f': 2 ) ), ( 'b', 'e', 'g' ) )
+        ) );
+
+        @include assert( 'Test nested map with dot notation not has key', (
+            is-false: has( ( 'a': 0, 'b': 1, 'c': ( 'd': 0, 'e': 1, 'f': 2 ) ), 'c.e.g' )
+        ) );
+
+        @include assert( 'Test dot notation strictness', (
+            is-false: has( ( 'a': 0, 'b': 1, 'c': ( 'd': 0, 'e': ( 'g': 0, 'h': 1 ), 'f': 2 ) ), 'e.g' )
+        ) );
+    }
+
+    @include test( 'pull' )
+    {
+        @include assert( 'Test map', (
+            action: pull( ( 'a': 0, 'b': 1, 'c': 2 ), 'a' ), equal: 0
+        ) );
+
+        @include assert( 'Test nested map', (
+            action: pull( ( 'a': ( 'b': ( 'c': 2 ) ) ), 'a.b.c' ), equal: 2
         ) );
 
         @include assert( 'Test inner value', (
-            action: get( ( 'a': ( 'b': ( 'c': 2 ) ) ), 'a.b' ), equal: ( 'c': 2 )
+            action: pull( ( 'a': ( 'b': ( 'c': 2 ) ) ), 'a.b' ), equal: ( 'c': 2 )
         ) );
 
         @include assert( 'Test alternative syntax', (
-            action: get( ( 'a': ( 'b': ( 'c': 2 ) ) ), 'a', 'b', 'c' ), equal: 2
+            action: pull( ( 'a': ( 'b': ( 'c': 2 ) ) ), 'a', 'b', 'c' ), equal: 2
+        ) );
+    }
+
+    @include test( 'push' )
+    {
+        @include assert( 'Test single value', (
+            action: push( ( 'a': 0, 'b': 1, 'c': 2 ), 'd', 3 ), equal: ( 'a': 0, 'b': 1, 'c': 2, 'd': 3 )
+        ) );
+
+        @include assert( 'Test map', (
+            action: push( ( 'a': 0, 'b': 1, 'c': 2 ), 'd', ( 'a': 0, 'b': 1, 'c': 2 ) ), equal: ( 'a': 0, 'b': 1, 'c': 2, 'd': ( 'a': 0, 'b': 1, 'c': 2 ) )
+        ) );
+
+        @include assert( 'Test new inner value', (
+            action: push( ( 'a': 0, 'b': 1, 'c': 2, 'd': ( 'a': 0, 'b': 1, 'c': 2 ) ), 'd.d', 3 ), equal: ( 'a': 0, 'b': 1, 'c': 2, 'd': ( 'a': 0, 'b': 1, 'c': 2, 'd': 3 ) )
+        ) );
+
+        @include assert( 'Test replace inner value', (
+            action: push( ( 'a': 0, 'b': 1, 'c': 2, 'd': ( 'a': 0, 'b': 1, 'c': 2 ) ), 'd.a', 1 ), equal: ( 'a': 0, 'b': 1, 'c': 2, 'd': ( 'a': 1, 'b': 1, 'c': 2 ) )
         ) );
     }
 

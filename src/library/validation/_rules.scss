@@ -1,0 +1,36 @@
+/// Map that stores all validation rules, the ones under are the default
+/// ones, but they can be overwritten and more can be added. Each rule
+/// must define a function name and an error key.
+/// @access private
+
+$_validation-rules: (
+
+    'numeric': (
+        'function': is-number,
+        'error': 'invalid-type',
+        'data': (
+            'type': 'number'
+        )
+    ),
+
+    'string': (
+        'function': is-string,
+        'error': 'invalid-type',
+        'data': (
+            'type': 'string'
+        )
+    ),
+
+    'list': (
+        'function': is-list,
+        'error': 'invalid-type',
+        'data': (
+            'type': 'list'
+        )
+    ),
+
+    'min': (
+        'function': is-min,
+        'error': 'below-range'
+    )
+);

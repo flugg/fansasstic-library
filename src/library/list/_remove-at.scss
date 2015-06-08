@@ -1,0 +1,49 @@
+/// Removes a value from a list at a given index.
+/// @access public
+/// @require {Function} is-empty
+///
+/// @param {List} $list - List to be manipulated.
+/// @param {Number} $nth - Index of value to be removed.
+/// @return {list}
+
+@function remove-at( $list, $index )
+{
+    @return _remove_at( $list, $index );
+}
+
+/// @alias remove-at
+
+@function remove-nth( $args... )
+{
+    @return remove-at( $args... );
+}
+
+/// @access private
+
+@function _remove-at( $list, $nth )
+{
+    @if is-empty( $list )
+    {
+        @return ();
+    }
+
+    $result: ();
+
+    // If the index is below zero we will remove starting
+    // from the end of the list and set the index equal
+    // to the length of the list plus the minus value.
+    $nth: if( $nth < 0, length( $list ) + $nth + 1, $nth );
+
+    // We then loop through each index of the list and
+    // only append the items to our result list when
+    // the index is not the index we want to remove.
+    @for $index from 1 through length( $list )
+    {
+        @if $index != $nth
+        {
+            $result: append( $result, nth( $list, $index ) );
+        }
+    }
+
+    @return $result;
+}

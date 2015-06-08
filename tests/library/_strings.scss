@@ -27,6 +27,11 @@
         @include assert( 'Test empty string', (
                 action: explode( '' ), equal: ()
         ) );
+
+        @include assert( 'Test without seperator', (
+            action: explode( 'a' ), equal: 'a'
+        ) );
+
         @include assert( 'Test string', (
                 action: explode( 'a b c' ), equal: 'a' 'b' 'c'
         ) );

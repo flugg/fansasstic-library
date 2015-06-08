@@ -15,29 +15,6 @@
         ) );
     }
 
-    @include test( 'empty' )
-    {
-        @include assert( 'Test empty string', (
-            is-false: empty( ( '' ) )
-        ) );
-
-        @include assert( 'Test single value', (
-            is-false: empty( 1 )
-        ) );
-
-        @include assert( 'Test integers', (
-            is-false: empty( ( 0 1 2 ) )
-        ) );
-
-        @include assert( 'Test strings', (
-            is-false: empty( ( 'a' 'b' 'c' ) )
-        ) );
-
-        @include assert( 'Test empty list', (
-            is-true: empty( () )
-        ) );
-    }
-
     @include test( 'first' )
     {
         @include assert( 'Test empty list', (
@@ -82,6 +59,7 @@
 
     @include test( 'insert-nth' )
     {
+
         @include assert( 'Test empty list', (
             action: insert-nth( (), 1, 1 ), equal: ()
         ) );

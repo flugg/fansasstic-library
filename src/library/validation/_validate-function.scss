@@ -1,0 +1,34 @@
+@function validate-function( $name, $validations )
+{
+    @return _validate-function( $name, $validations );
+}
+
+@function _validate-function( $name, $validations )
+{
+    @each $variable, $validation in $validations
+    {
+        @if not pull( $validation, 'passed' )
+        {
+            $value: pull( $validation, 'value' );
+
+            @if is-string( $value )
+            {
+                $value: "'" + pull( $validation, 'value' ) + "'";
+            }
+
+            $rule: pull( $validation, 'rule' );
+            $error: pull( $_validation-rules, '#{$rule}.error' );
+
+            $data: (
+                'function': $name,
+                'variable': $variable,
+                'value': $value,
+                'value-type': type-of( $value )
+            );
+
+            @return error( $error, map-merge( $data, pull( $_validation-rules, '#{$rule}.data' ) ) );
+        }
+    }
+
+    @return true;
+}

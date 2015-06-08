@@ -1,0 +1,16 @@
+// Import dependencies
+@import '../bower_components/true/sass/true';
+@import 'assert';
+
+// Import library source
+@import '../src/library';
+
+// Import test suite
+@import 'library/numbers';
+@import 'library/maps';
+@import 'library/math';
+@import 'library/lists';
+@import 'library/strings';
+
+// Run test report in console
+@include report;

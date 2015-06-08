@@ -1,0 +1,59 @@
+/// Joins all the list items together and forms a string
+/// separating each item with a given string.
+/// @access public
+/// @require {Function} is-empty
+/// @require {Function} is-list
+///
+/// @param {List} $list - List to be imploded.
+/// @param {String} $separator - String to separate list items.
+/// @return {String}
+
+@function implode( $list, $separator: ' ' )
+{
+    @return _implode( $list, $separator );
+}
+
+/// @access private
+
+@function _implode( $list, $separator )
+{
+    // If the list specified has no items we will simply
+    // return an empty string, this way you can always
+    // expect a string result from a function call.
+    @if is-empty( $list )
+    {
+        @return '';
+    }
+
+    $string: null;
+
+    // We loop through each element in the given list
+    // using a for loop, since we'll handle the last
+    // item of the list different than the others.
+    @for $index from 1 through length( $list )
+    {
+        $item: nth( $list, $index );
+
+        // If the item at the given index is a list itself, we will
+        // call implode recursively and append the result to our
+        // string. Else we'll just append the specified item.
+        @if is-list( $item )
+        {
+            $string: $string#{implode( $item, $separator )};
+        }
+        @else
+        {
+            $string: $string#{$item};
+        }
+
+        // We then append our separator string to the result
+        // string as long as the current item is not the
+        // last element of the specified list.
+        @if $index != length( $list )
+        {
+            $string: $string#{$separator}
+        }
+    }
+
+    @return quote( $string );
+}

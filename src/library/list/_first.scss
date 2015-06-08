@@ -1,0 +1,23 @@
+/// Retrieves the first value in the list.
+/// @access public
+/// @require {Function} is-empty
+///
+/// @param {List} $list - List to be retrieved from.
+/// @return {*}
+
+@function first( $list )
+{
+    @return _first( $list );
+}
+
+/// @access private
+
+@function _first( $list )
+{
+    @if is-empty( $list )
+    {
+        @return null;
+    }
+
+    @return nth( $list, 1 );
+}

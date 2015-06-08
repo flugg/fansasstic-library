@@ -1,0 +1,47 @@
+/// Replace a value in a list at a given index with a new value.
+/// @access public
+/// @require {Function} is-empty
+///
+/// @param {List} $list - List to be manipulated.
+/// @param {Number} $index - Index of value to be replaced.
+/// @param {*} $value - Value to replace value at index.
+/// @return {List}
+
+@function replace-at( $list, $index, $value )
+{
+    @return _replace_at( $list, $index, $value );
+}
+
+/// @alias replace-at
+
+@function replace-nth( $args... )
+{
+    @return replace-at( $args... );
+}
+
+/// @access private
+
+@function _replace-at( $list, $nth, $value )
+{
+    @if is-empty( $list )
+    {
+        @return ();
+    }
+
+    $result: ();
+
+    // If the index is below zero we will replace starting
+    // from the end of the list and set the index equal
+    // to the length of the list plus the minus value.
+    $nth: if( $nth < 0, length( $list ) + $nth + 1, $nth );
+
+    @for $index from 1 through length( $list )
+    {
+        // We then loop through each index in our list and append
+        // the replace value if the index and nth are equal. If
+        // they're not equal we will just append the list item.
+        $result: append( $result, if( $index == $nth, $value, nth( $list, $index ) ) );
+    }
+
+    @return $result;
+}

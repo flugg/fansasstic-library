@@ -1,0 +1,43 @@
+/// Removes all items with a specified value from a list.
+/// @access public
+/// @require {Function} is-empty
+/// @require {Function} is-list
+///
+/// @param {List} $list - List to be manipulated.
+/// @param {*} $value - Value to be removed.
+/// @param {Bool} $recursive - Wether or not it should traverse the list.
+/// @return {List}
+
+@function remove( $list, $value, $recursive: false )
+{
+    @return _remove( $list, $value, $recursive );
+}
+
+/// @access private
+
+@function _remove( $list, $value, $recursive )
+{
+    @if is-empty( $list )
+    {
+        @return ();
+    }
+
+    $result: ();
+
+    @each $item in $list
+    {
+        // We're looping through each item of our list, if it's
+        // a list itself and recursive is true we'll append
+        // the recursive result to our result list.
+        @if is-list( $item ) and $recursive
+        {
+            $result: append( $result, remove( $item, $value, $recursive ) );
+        }
+        @else if $item != $value
+        {
+            $result: append( $result, $item );
+        }
+    }
+
+    @return $result;
+}

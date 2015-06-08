@@ -1,0 +1,48 @@
+/// Replaces all items in a list with a given value
+/// with a new value.
+/// @access public
+/// @require {Function} is-empty
+/// @require {Function} is-list
+///
+/// @param {List} $list - List to be manipulated.
+/// @param {*} $old-value - Value to be replaced.
+/// @param {*} $new-value - Value to replace old value.
+/// @param {Bool} $recursive - Wether or not it should traverse the list.
+/// @return {List}
+
+@function replace( $list, $old-value, $new-value, $recursive: false )
+{
+    @return _replace( $list, $old-value, $new-value, $recursive );
+}
+
+/// @access private
+
+@function _replace( $list, $old-value, $new-value, $recursive )
+{
+    @if is-empty( $list )
+    {
+        @return ();
+    }
+
+    $result: ();
+
+    @each $item in $list
+    {
+        // We check each item in our list, if the item is a list
+        // itself and recursive is true we'll call the function
+        // recurively and add the return value to the result.
+        @if is-list( $item ) and $recursive
+        {
+            $result: append( $result, replace( $item, $old-value, $new-value, $recursive ) );
+        }
+        @else
+        {
+            // If the item is not a list we will check if it's equal to
+            // the value we want to replace. If so we append the new
+            // value to our result, else we just append the item.
+            $result: if( $item == $old-value, append( $result, $new-value ), append( $result, $item ) );
+        }
+    }
+
+    @return $result;
+}

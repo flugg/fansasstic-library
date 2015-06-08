@@ -1,0 +1,28 @@
+/// Returns true if the given list contains the specified value.
+/// @access public
+///
+/// @param {List} $list - List to be checked.
+/// @param {*} $value - Value to check for.
+/// @return {Boolean}
+
+@function contains( $list, $value )
+{
+    @return _contains( $list, $value );
+}
+
+/// @alias contains
+
+@function in-list( $args... )
+{
+    @return contains( $args... );
+}
+
+/// @access private
+
+@function _contains( $list, $value )
+{
+    // We'll look for the specified value in the given map. If it finds
+    // the index, we return true, but if it's not in the list it will
+    // return null, so to force a boolean we use a double negative.
+    @return not not index( $list, $value );
+}

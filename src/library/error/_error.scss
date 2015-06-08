@@ -1,0 +1,11 @@
+@function error( $name, $data )
+{
+    $name: if( map-has-key( $_error-messages, $name ), $name, 'invalid-error' );
+
+    @error _error( $name, $data );
+}
+
+@function _error( $name, $data )
+{
+    @return _parse-message( map-get( $_error-messages, $name ), $data );
+}
