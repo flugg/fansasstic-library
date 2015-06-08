@@ -1,21 +1,21 @@
 {
-    "name": "fansasstic-library",
-    "version": "0.9.0",
-    "authors": [
-        "Flugger <flugged@gmail.com>"
-    ],
-    "license": "MIT",
-    "ignore": [
-        "**/.*",
-        "node_modules",
-        "bower_components",
-        "test",
-        "tests"
-    ],
-    "dependencies": {
-        "fansasstic-validator": "*"
-    },
-    "devDependencies": {
-        "true": "~1.0.1"
-    }
+  "name": "fansasstic-library",
+  "version": "0.9.1",
+  "authors": [
+    "Flugger <flugged@gmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "fansasstic-validator": "*"
+  },
+  "devDependencies": {
+    "true": "~1.0.1"
+  }
 }
