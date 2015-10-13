@@ -6,7 +6,7 @@
 /// @param {boolean} $reverse - Wether or not to rotate left.
 /// @return {list}
 
-@function rotate( $list, $reverse: false )
+@function rotate-list( $list, $reverse: false )
 {
     $result: ();
     $direction: if( $reverse, -1, 1 );

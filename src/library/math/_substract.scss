@@ -7,7 +7,7 @@
 /// @param {map|list|number} $subtrahend - Value to add by.
 /// @return {number}
 
-@function substract( $minuend, $subtrahend )
+@function subtract( $minuend, $subtrahend )
 {
     @return _calculate( $minuend, $subtrahend, 'substract' );
 }

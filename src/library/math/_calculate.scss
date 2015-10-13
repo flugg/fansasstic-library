@@ -222,8 +222,17 @@
 
     @each $key in $keys
     {
+        $unit: null;
         $number1: map-get( $map1, $key );
         $number2: map-get( $map2, $key );
+
+        @if $number1 and not unitless( $number1 ) {
+            $unit: unit( $number1 );
+            $number1: strip-unit( $number1 );
+        } @else if $number2 and not unitless( $number2 ) {
+            $unit: unit( $number2 );
+            $number2: strip-unit( $number2 );
+        }
 
         @if $number1 or $number2
         {
@@ -244,6 +253,10 @@
             @else if $operation == 'divide'
             {
                 $calculated-result: if( $number2 == 0, null, if( $number1 and $number2, $number1 / $number2, if( $number1, $number1, $number2 ) ) );
+            }
+
+            @if unitless( $calculated-result ) and not is-null( $unit ) {
+                $calculated-result: add-unit( $calculated-result, $unit );
             }
 
             $result: map-merge( $result, ( #{$key}: $calculated-result ) );
